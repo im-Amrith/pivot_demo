@@ -44,11 +44,13 @@ const Hero = () => {
                             </span>
                             Intelligent BPA for SMEs
                         </div>
-                        <ShimmerText text="Transformation not just Automation" />
+                        <div className="min-h-[140px] sm:min-h-0">
+                            <ShimmerText text="Transformation not just Automation" />
+                        </div>
                         <p className="mt-6 max-w-2xl text-base md:text-lg font-medium text-white/85 leading-relaxed drop-shadow-md [text-shadow:_0_1px_10px_rgb(0_0_0_/_40%)]">
                             Unlock your business potential with high-performance intelligent process automation tailored for SMEs. We evolve your workflows from manual to autonomous.
                         </p>
-                        <div className="flex flex-col gap-4 sm:flex-row items-center">
+                        <div className="flex w-full justify-center lg:justify-start lg:w-auto mt-8">
                             <MagneticButton
                                 onClick={handleEvolutionClick}
                                 className="flex items-center justify-center gap-2 rounded border-2 border-primary/50 bg-primary px-8 py-4 font-bold text-white shadow-xl shadow-primary/25 hover:shadow-primary/40 transition-all w-full sm:w-auto overflow-hidden relative"
