@@ -12,7 +12,7 @@ const Navbar = () => {
                 <div className="flex items-center gap-2">
                     <PivotLogo className="h-10 w-10" />
                     <span className="text-xl font-bold tracking-tight text-white">
-                        Pivot <span className="text-primary">Automations</span>
+                        Pivot
                     </span>
                 </div>
 

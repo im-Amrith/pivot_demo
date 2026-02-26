@@ -2,96 +2,211 @@ import { useRef, type ReactNode } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
-type AgentType = 'writer' | 'mom' | 'helpdesk' | 'interviewer';
+type AgentType = 'bpa' | 'consulting' | 'idp' | 'finance' | 'hr' | 'customer_service';
 
-/* ─── Writer: glowing neon stylus ─── */
-const WriterProp = ({ color }: { color: string }) => {
+/* ─── BPA: Interlocking gear system (two torus rings on different axes) ─── */
+const BpaProp = ({ color }: { color: string }) => {
     const group = useRef<THREE.Group>(null!);
     useFrame((state) => {
         const t = state.clock.elapsedTime;
-        group.current.position.x = 0.55 + Math.sin(t * 1.2) * 0.05;
-        group.current.position.y = 0.15 + Math.sin(t * 1.8) * 0.08;
-        group.current.rotation.z = -0.5 + Math.sin(t * 0.8) * 0.1;
+        group.current.position.x = 0.5 + Math.sin(t * 0.8) * 0.04;
+        group.current.position.y = 0.15 + Math.sin(t * 1.2) * 0.06;
+        group.current.children[0].rotation.z = t * 0.6;
+        group.current.children[1].rotation.x = t * -0.5;
     });
     return (
-        <group ref={group} rotation={[0, 0, -0.5]}>
-            {/* Shaft */}
+        <group ref={group}>
+            {/* Gear 1 */}
             <mesh>
-                <cylinderGeometry args={[0.018, 0.022, 0.45, 8]} />
+                <torusGeometry args={[0.16, 0.025, 12, 24]} />
                 <meshStandardMaterial
-                    color={color}
-                    emissive={color}
-                    emissiveIntensity={2.5}
-                    transparent
-                    opacity={0.85}
+                    color={color} emissive={color} emissiveIntensity={2.5}
+                    transparent opacity={0.8} toneMapped={false}
                 />
             </mesh>
-            {/* Nib */}
-            <mesh position={[0, -0.27, 0]}>
-                <coneGeometry args={[0.025, 0.1, 8]} />
+            {/* Gear 2 — perpendicular intersection */}
+            <mesh rotation={[Math.PI / 2, 0, 0]} position={[0.12, 0, 0]}>
+                <torusGeometry args={[0.12, 0.02, 12, 24]} />
                 <meshStandardMaterial
-                    color="#ffffff"
-                    emissive={color}
-                    emissiveIntensity={4}
-                    transparent
-                    opacity={0.9}
+                    color={color} emissive={color} emissiveIntensity={2}
+                    transparent opacity={0.7} toneMapped={false}
                 />
             </mesh>
-            {/* Glow tip point light */}
-            <pointLight position={[0, -0.32, 0]} color={color} intensity={2} distance={0.8} />
+            <pointLight position={[0, 0, 0.1]} color={color} intensity={2} distance={0.8} />
         </group>
     );
 };
 
-/* ─── Minutes of Meeting: floating data-node grid ─── */
-const MomProp = ({ color }: { color: string }) => {
+/* ─── Consulting: Neural node (icosahedron + satellite spheres) ─── */
+const ConsultingProp = ({ color }: { color: string }) => {
     const group = useRef<THREE.Group>(null!);
     useFrame((state) => {
         const t = state.clock.elapsedTime;
-        group.current.position.x = 0.5 + Math.sin(t * 0.9) * 0.06;
-        group.current.position.y = 0.1 + Math.sin(t * 1.4) * 0.06;
-        group.current.rotation.y = t * 0.3;
+        group.current.position.x = 0.5 + Math.sin(t * 1.1) * 0.05;
+        group.current.position.y = 0.2 + Math.sin(t * 1.5) * 0.06;
+        group.current.rotation.y = t * 0.4;
     });
 
-    const nodes: ReactNode[] = [];
-    for (let r = 0; r < 3; r++) {
-        for (let c = 0; c < 3; c++) {
-            nodes.push(
-                <mesh key={`${r}-${c}`} position={[(c - 1) * 0.09, (1 - r) * 0.09, 0]}>
-                    <boxGeometry args={[0.06, 0.06, 0.015]} />
-                    <meshStandardMaterial
-                        color={color}
-                        emissive={color}
-                        emissiveIntensity={1.5 + ((r + c) % 2) * 1.5}
-                        transparent
-                        opacity={0.7}
-                    />
-                </mesh>
-            );
-        }
-    }
+    const satellites = [
+        [0.22, 0.08, 0], [-0.18, 0.12, 0.1], [0.05, -0.2, 0.12],
+        [-0.1, 0.05, -0.2], [0.15, -0.1, -0.15],
+    ];
 
     return (
         <group ref={group}>
-            {/* Clipboard backing */}
-            <mesh position={[0, 0, -0.015]}>
-                <planeGeometry args={[0.35, 0.35]} />
-                <meshPhysicalMaterial
-                    color={color}
-                    transparent
-                    opacity={0.12}
-                    roughness={0.2}
-                    side={THREE.DoubleSide}
+            {/* Central node */}
+            <mesh>
+                <icosahedronGeometry args={[0.1, 1]} />
+                <meshStandardMaterial
+                    color={color} emissive={color} emissiveIntensity={3}
+                    transparent opacity={0.85} toneMapped={false}
                 />
             </mesh>
-            {nodes}
-            <pointLight position={[0, 0, 0.1]} color={color} intensity={1.5} distance={0.8} />
+            {/* Satellite spheres */}
+            {satellites.map((pos, i) => (
+                <mesh key={i} position={pos as [number, number, number]}>
+                    <sphereGeometry args={[0.03, 12, 12]} />
+                    <meshStandardMaterial
+                        color={color} emissive={color} emissiveIntensity={2}
+                        transparent opacity={0.6} toneMapped={false}
+                    />
+                </mesh>
+            ))}
+            <pointLight position={[0, 0, 0.1]} color={color} intensity={2} distance={0.8} />
         </group>
     );
 };
 
-/* ─── Helpdesk: holographic headset ring ─── */
-const HelpdeskProp = ({ color }: { color: string }) => {
+/* ─── IDP: Scanning document (plane + sweeping scanner line) ─── */
+const IdpProp = ({ color }: { color: string }) => {
+    const group = useRef<THREE.Group>(null!);
+    const scanRef = useRef<THREE.Mesh>(null!);
+    useFrame((state) => {
+        const t = state.clock.elapsedTime;
+        group.current.position.x = 0.5 + Math.sin(t * 0.9) * 0.05;
+        group.current.position.y = 0.12 + Math.sin(t * 1.3) * 0.05;
+        // Scanner sweep up/down
+        scanRef.current.position.y = Math.sin(t * 2) * 0.12;
+    });
+    return (
+        <group ref={group}>
+            {/* Document surface */}
+            <mesh rotation={[0, 0.2, 0]}>
+                <planeGeometry args={[0.28, 0.36]} />
+                <meshPhysicalMaterial
+                    color={color} transparent opacity={0.15}
+                    roughness={0.2} side={THREE.DoubleSide}
+                />
+            </mesh>
+            {/* Text lines (decorative) */}
+            {[-0.1, -0.02, 0.06].map((y, i) => (
+                <mesh key={i} position={[0, y, 0.005]} rotation={[0, 0.2, 0]}>
+                    <planeGeometry args={[0.2 - i * 0.04, 0.015]} />
+                    <meshStandardMaterial
+                        color={color} emissive={color} emissiveIntensity={1.5}
+                        transparent opacity={0.5} side={THREE.DoubleSide} toneMapped={false}
+                    />
+                </mesh>
+            ))}
+            {/* Scanner line */}
+            <mesh ref={scanRef} position={[0, 0, 0.01]} rotation={[0, 0.2, 0]}>
+                <planeGeometry args={[0.3, 0.008]} />
+                <meshStandardMaterial
+                    color="#ffffff" emissive={color} emissiveIntensity={5}
+                    transparent opacity={0.9} side={THREE.DoubleSide} toneMapped={false}
+                />
+            </mesh>
+            <pointLight position={[0, 0, 0.15]} color={color} intensity={1.5} distance={0.8} />
+        </group>
+    );
+};
+
+/* ─── Finance: Holographic bar chart (3 pillars) ─── */
+const FinanceProp = ({ color }: { color: string }) => {
+    const group = useRef<THREE.Group>(null!);
+    useFrame((state) => {
+        const t = state.clock.elapsedTime;
+        group.current.position.x = 0.5 + Math.sin(t * 0.8) * 0.04;
+        group.current.position.y = 0.1 + Math.sin(t * 1.4) * 0.05;
+        group.current.rotation.y = Math.sin(t * 0.5) * 0.3;
+    });
+
+    const bars = [
+        { h: 0.18, x: -0.1, c: '#38bdf8' },
+        { h: 0.28, x: 0, c: color },
+        { h: 0.22, x: 0.1, c: '#34d399' },
+    ];
+
+    return (
+        <group ref={group}>
+            {/* Base platform */}
+            <mesh position={[0, -0.02, 0]} rotation={[Math.PI / 2, 0, 0]}>
+                <planeGeometry args={[0.35, 0.15]} />
+                <meshPhysicalMaterial
+                    color={color} transparent opacity={0.1}
+                    roughness={0.2} side={THREE.DoubleSide}
+                />
+            </mesh>
+            {bars.map((bar, i) => (
+                <mesh key={i} position={[bar.x, bar.h / 2, 0]}>
+                    <boxGeometry args={[0.06, bar.h, 0.06]} />
+                    <meshStandardMaterial
+                        color={bar.c} emissive={bar.c} emissiveIntensity={2}
+                        transparent opacity={0.75} toneMapped={false}
+                    />
+                </mesh>
+            ))}
+            <pointLight position={[0, 0.15, 0.1]} color={color} intensity={1.5} distance={0.8} />
+        </group>
+    );
+};
+
+/* ─── HR: Network of floating capsule silhouettes ─── */
+const HrProp = ({ color }: { color: string }) => {
+    const group = useRef<THREE.Group>(null!);
+    useFrame((state) => {
+        const t = state.clock.elapsedTime;
+        group.current.position.x = 0.5 + Math.sin(t * 1.0) * 0.04;
+        group.current.position.y = 0.15 + Math.sin(t * 1.6) * 0.05;
+        group.current.rotation.y = t * 0.3;
+    });
+
+    const figures = [
+        { x: 0, y: 0.05, z: 0 },
+        { x: -0.15, y: -0.02, z: 0.05 },
+        { x: 0.15, y: -0.02, z: -0.05 },
+    ];
+
+    return (
+        <group ref={group}>
+            {figures.map((pos, i) => (
+                <group key={i} position={[pos.x, pos.y, pos.z]}>
+                    {/* Head */}
+                    <mesh position={[0, 0.1, 0]}>
+                        <sphereGeometry args={[0.035, 12, 12]} />
+                        <meshStandardMaterial
+                            color={color} emissive={color} emissiveIntensity={2}
+                            transparent opacity={0.7} toneMapped={false}
+                        />
+                    </mesh>
+                    {/* Body capsule */}
+                    <mesh position={[0, 0, 0]}>
+                        <capsuleGeometry args={[0.03, 0.08, 8, 16]} />
+                        <meshStandardMaterial
+                            color={color} emissive={color} emissiveIntensity={1.5}
+                            transparent opacity={0.6} toneMapped={false}
+                        />
+                    </mesh>
+                </group>
+            ))}
+            {/* Connection lines between figures */}
+            <pointLight position={[0, 0.05, 0.1]} color={color} intensity={1.5} distance={0.8} />
+        </group>
+    );
+};
+
+/* ─── Customer Service: Holographic headset ring ─── */
+const CustomerServiceProp = ({ color }: { color: string }) => {
     const ring = useRef<THREE.Mesh>(null!);
     useFrame((state) => {
         const t = state.clock.elapsedTime;
@@ -104,79 +219,16 @@ const HelpdeskProp = ({ color }: { color: string }) => {
             <mesh ref={ring} position={[0, 0.45, 0]}>
                 <torusGeometry args={[0.3, 0.025, 16, 48]} />
                 <meshStandardMaterial
-                    color={color}
-                    emissive={color}
-                    emissiveIntensity={3}
-                    transparent
-                    opacity={0.8}
+                    color={color} emissive={color} emissiveIntensity={3}
+                    transparent opacity={0.8} toneMapped={false}
                 />
             </mesh>
             {/* Mic boom */}
             <mesh position={[0.22, 0.35, 0.15]} rotation={[0, 0, -0.6]}>
                 <cylinderGeometry args={[0.01, 0.01, 0.18, 8]} />
-                <meshStandardMaterial color={color} emissive={color} emissiveIntensity={2} />
+                <meshStandardMaterial color={color} emissive={color} emissiveIntensity={2} toneMapped={false} />
             </mesh>
             <pointLight position={[0, 0.5, 0]} color={color} intensity={2} distance={1} />
-        </group>
-    );
-};
-
-/* ─── Interviewer: scanning lens with pulse ─── */
-const InterviewerProp = ({ color }: { color: string }) => {
-    const group = useRef<THREE.Group>(null!);
-    const innerRef = useRef<THREE.Mesh>(null!);
-
-    useFrame((state) => {
-        const t = state.clock.elapsedTime;
-        group.current.position.x = 0.5 + Math.sin(t * 1.1) * 0.05;
-        group.current.position.y = 0.2 + Math.sin(t * 1.5) * 0.06;
-        group.current.rotation.y = t * 0.5;
-        // Scanning pulse
-        const scale = 1 + Math.sin(t * 3) * 0.15;
-        innerRef.current.scale.set(scale, scale, 1);
-    });
-
-    return (
-        <group ref={group}>
-            {/* Outer ring */}
-            <mesh>
-                <ringGeometry args={[0.12, 0.16, 32]} />
-                <meshStandardMaterial
-                    color={color}
-                    emissive={color}
-                    emissiveIntensity={3}
-                    transparent
-                    opacity={0.85}
-                    side={THREE.DoubleSide}
-                />
-            </mesh>
-            {/* Inner lens */}
-            <mesh ref={innerRef} position={[0, 0, 0.005]}>
-                <circleGeometry args={[0.1, 32]} />
-                <meshPhysicalMaterial
-                    color={color}
-                    transmission={0.8}
-                    roughness={0.1}
-                    transparent
-                    opacity={0.4}
-                    side={THREE.DoubleSide}
-                />
-            </mesh>
-            {/* Cross-hairs */}
-            {[0, Math.PI / 2].map((rot, i) => (
-                <mesh key={i} rotation={[0, 0, rot]}>
-                    <planeGeometry args={[0.28, 0.008]} />
-                    <meshStandardMaterial
-                        color={color}
-                        emissive={color}
-                        emissiveIntensity={2}
-                        transparent
-                        opacity={0.5}
-                        side={THREE.DoubleSide}
-                    />
-                </mesh>
-            ))}
-            <pointLight position={[0, 0, 0.15]} color={color} intensity={2} distance={0.8} />
         </group>
     );
 };
@@ -184,14 +236,18 @@ const InterviewerProp = ({ color }: { color: string }) => {
 /* ─── Selector ─── */
 const AgentProp = ({ type, color }: { type: AgentType; color: string }) => {
     switch (type) {
-        case 'writer':
-            return <WriterProp color={color} />;
-        case 'mom':
-            return <MomProp color={color} />;
-        case 'helpdesk':
-            return <HelpdeskProp color={color} />;
-        case 'interviewer':
-            return <InterviewerProp color={color} />;
+        case 'bpa':
+            return <BpaProp color={color} />;
+        case 'consulting':
+            return <ConsultingProp color={color} />;
+        case 'idp':
+            return <IdpProp color={color} />;
+        case 'finance':
+            return <FinanceProp color={color} />;
+        case 'hr':
+            return <HrProp color={color} />;
+        case 'customer_service':
+            return <CustomerServiceProp color={color} />;
         default:
             return null;
     }

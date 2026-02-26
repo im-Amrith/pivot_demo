@@ -45,7 +45,7 @@ const Hero = () => {
                             Intelligent BPA for SMEs
                         </div>
                         <ShimmerText text="Transformation not just Automation" />
-                        <p className="max-w-xl text-lg text-slate-600">
+                        <p className="mt-6 max-w-2xl text-base md:text-lg font-medium text-white/85 leading-relaxed drop-shadow-md [text-shadow:_0_1px_10px_rgb(0_0_0_/_40%)]">
                             Unlock your business potential with high-performance intelligent process automation tailored for SMEs. We evolve your workflows from manual to autonomous.
                         </p>
                         <div className="flex flex-col gap-4 sm:flex-row items-center">

@@ -6,23 +6,26 @@ import { ChevronLeft, ChevronRight, Info } from 'lucide-react';
 import AIAgentCore from '../3d/AIAgentCore';
 import type { AgentType } from '../3d/AgentProps';
 
-const typeMap: Record<number, AgentType> = {
-    0: 'helpdesk',
-    1: 'interviewer',
-    2: 'mom',
-    3: 'writer',
-};
+interface ServiceAgent {
+    id: number;
+    name: string;
+    desc: string;
+    color: string;
+    tags: string[];
+    type: AgentType;
+}
+
+const agents: ServiceAgent[] = [
+    { id: 1, name: 'Custom BPA', desc: 'Tailored business process architecture designed specifically for your unique operational model.', color: '#6366f1', tags: ['Workflow', 'Architecture'], type: 'bpa' },
+    { id: 2, name: 'AI Consulting', desc: 'Strategic advisory on implementing GenAI and Machine Learning models to augment human labor.', color: '#0ea5e9', tags: ['GenAI', 'Strategy'], type: 'consulting' },
+    { id: 3, name: 'IDP', desc: 'Intelligent Document Processing using OCR to digitize invoices, contracts, and IDs instantly.', color: '#f59e0b', tags: ['OCR', 'Digitization'], type: 'idp' },
+    { id: 4, name: 'Financial Automation', desc: 'Automate accounts payable, receivable, and reconciliation to eliminate month-end stress.', color: '#34d399', tags: ['Payables', 'Reconciliation'], type: 'finance' },
+    { id: 5, name: 'HR Automation', desc: 'Streamline the employee lifecycle from onboarding to payroll and performance management.', color: '#f43f5e', tags: ['Onboarding', 'Payroll'], type: 'hr' },
+    { id: 6, name: 'Customer Service', desc: 'Deploy 24/7 intelligent agents that resolve tickets and handle inquiries autonomously.', color: '#f97316', tags: ['24/7 Agents', 'Ticketing'], type: 'customer_service' },
+];
 
 const RobotCarousel = () => {
-    const [activeIndex, setActiveIndex] = useState(2);
-
-    const agents = [
-        { id: 1, name: 'Helpdesk Support AI', desc: 'Always-on customer support with human warmth.', color: '#6366f1', tags: ['Ticketing', 'Knowledge Base'], robotType: 0 },
-        { id: 2, name: 'AI Interviewer Agent', desc: 'Simulates interviews and gives honest feedback.', color: '#0ea5e9', tags: ['Scoring', 'Feedback'], robotType: 1 },
-        { id: 3, name: 'Minutes of Meeting AI', desc: 'The silent ninja who listens, notes, and recaps.', color: '#f59e0b', tags: ['Call Summary', 'Action Items'], robotType: 2 },
-        { id: 4, name: 'Writer AI', desc: 'Creates compelling content with creative flair.', color: '#f43f5e', tags: ['Copywriting', 'Content'], robotType: 3 },
-        { id: 5, name: 'Hustle Buddy AI', desc: 'Sales assistant who jokes, hustles, and closes.', color: '#f97316', tags: ['Follow-up', 'Lead Nurturing'], robotType: 1 },
-    ];
+    const [activeIndex, setActiveIndex] = useState(0);
 
     const handleNext = () => setActiveIndex((prev) => (prev + 1) % agents.length);
     const handlePrev = () => setActiveIndex((prev) => (prev - 1 + agents.length) % agents.length);
@@ -86,7 +89,6 @@ const RobotCarousel = () => {
                                         gl={{ alpha: true, antialias: true }}
                                         style={{ background: 'transparent' }}
                                     >
-                                        {/* Studio Lighting Rig */}
                                         <ambientLight intensity={0.4} />
                                         <directionalLight
                                             position={[5, 5, 5]}
@@ -102,7 +104,7 @@ const RobotCarousel = () => {
 
                                         <AIAgentCore
                                             color={agent.color === '#f43f5e' ? '#ff6b8a' : agent.color}
-                                            type={typeMap[agent.robotType] || 'writer'}
+                                            type={agent.type}
                                         />
 
                                         <ContactShadows
@@ -128,7 +130,7 @@ const RobotCarousel = () => {
                                     </div>
 
                                     <button className="w-full py-3 rounded-xl bg-white/20 hover:bg-white/30 transition-all font-bold text-sm mt-4">
-                                        Hire {agent.name.split(' ')[0]}
+                                        Explore {agent.name}
                                     </button>
                                 </div>
                             </motion.div>

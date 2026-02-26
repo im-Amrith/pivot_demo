@@ -9,7 +9,7 @@ interface AIAgentCoreProps {
     type?: AgentType;
 }
 
-const AIAgentCore = ({ color = '#38bdf8', type = 'writer' }: AIAgentCoreProps) => {
+const AIAgentCore = ({ color = '#38bdf8', type = 'bpa' }: AIAgentCoreProps) => {
     const group = useRef<THREE.Group>(null!);
     const shellRef = useRef<THREE.Mesh>(null!);
     const innerRef = useRef<THREE.Mesh>(null!);
