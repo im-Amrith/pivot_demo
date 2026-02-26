@@ -18,7 +18,7 @@ const Contact = () => (
                     whileInView="visible"
                     viewport={{ once: true }}
                     variants={staggerContainer(0.1)}
-                    className="p-12 lg:w-1/2 flex flex-col justify-between"
+                    className="p-8 lg:p-12 lg:w-1/2 flex flex-col justify-between"
                 >
                     <div>
                         <RevealText>
@@ -65,10 +65,10 @@ const Contact = () => (
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={SPRING.gentle}
-                    className="bg-white p-12 lg:w-1/2"
+                    className="bg-white p-8 lg:p-12 lg:w-1/2"
                 >
                     <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-                        <div className="grid grid-cols-2 gap-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             <div className="space-y-2">
                                 <label className="text-xs font-bold uppercase tracking-widest text-slate-500">First Name</label>
                                 <input className="w-full rounded border-slate-200 bg-slate-50 p-3 focus:border-primary focus:ring-primary outline-none transition-colors" placeholder="John" type="text" />

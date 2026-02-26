@@ -5,7 +5,7 @@ import { RevealText, SPRING, VIEWPORT, staggerContainer, fadeSlideUp } from '../
 
 /* ─── Floating UI Pill 1: Chat / Approval Node ─── */
 const ChatPill = () => (
-    <div className="w-72 rounded-2xl backdrop-blur-md bg-white/70 border border-gray-200 shadow-xl shadow-slate-200/50 p-5">
+    <div className="w-full max-w-72 rounded-2xl backdrop-blur-md bg-white/70 border border-gray-200 shadow-xl shadow-slate-200/50 p-5">
         <div className="flex items-center gap-3 mb-4">
             <div className="size-9 rounded-full bg-gradient-to-br from-primary to-indigo-500 flex items-center justify-center text-white text-xs font-bold shadow-md shadow-primary/30">
                 AI
@@ -36,7 +36,7 @@ const ChatPill = () => (
 
 /* ─── Floating UI Pill 2: Data-Sync Progress ─── */
 const SyncPill = () => (
-    <div className="w-64 rounded-2xl backdrop-blur-md bg-white/70 border border-gray-200 shadow-xl shadow-slate-200/50 p-5">
+    <div className="w-full max-w-64 rounded-2xl backdrop-blur-md bg-white/70 border border-gray-200 shadow-xl shadow-slate-200/50 p-5">
         <div className="flex items-center justify-between mb-3">
             <p className="text-xs font-bold text-slate-800 tracking-wide">System Sync</p>
             <span className="text-[10px] font-bold text-primary">87%</span>
@@ -135,7 +135,7 @@ const Partnership = () => {
                     </motion.div>
 
                     {/* ── Right Column: Floating Parallax UI Pills ── */}
-                    <div className="lg:w-1/2 relative min-h-[400px] flex items-center justify-center">
+                    <div className="lg:w-1/2 relative min-h-[300px] md:min-h-[400px] flex flex-col md:block items-center gap-6">
                         {/* Decorative blurred backdrop circle */}
                         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                             <div className="w-80 h-80 rounded-full bg-primary/8 blur-3xl" />
@@ -151,7 +151,7 @@ const Partnership = () => {
                             initial={{ opacity: 0, x: 30 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={VIEWPORT}
-                            className="absolute top-0 right-0 lg:top-4 lg:right-0 z-20"
+                            className="relative md:absolute top-0 right-0 lg:top-4 lg:right-0 z-20"
                         >
                             <ChatPill />
                         </motion.div>
@@ -166,7 +166,7 @@ const Partnership = () => {
                             initial={{ opacity: 0, x: -30 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={VIEWPORT}
-                            className="absolute bottom-0 left-0 lg:bottom-4 lg:left-0 z-10"
+                            className="relative md:absolute bottom-0 left-0 lg:bottom-4 lg:left-0 z-10"
                         >
                             <SyncPill />
                         </motion.div>

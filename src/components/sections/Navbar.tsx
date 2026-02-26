@@ -23,7 +23,7 @@ const Navbar = () => {
                     <a className="rounded bg-primary px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all" href="#contact">Get Started</a>
                 </div>
 
-                <button className="md:hidden text-slate-900" onClick={() => setIsOpen(!isOpen)}>
+                <button className="md:hidden text-white" onClick={() => setIsOpen(!isOpen)}>
                     {isOpen ? <X /> : <Menu />}
                 </button>
             </nav>

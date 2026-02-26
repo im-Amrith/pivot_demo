@@ -33,7 +33,7 @@ const WhyUs = () => (
                     whileInView="visible"
                     viewport={VIEWPORT}
                     variants={staggerContainer(0.15)}
-                    className="grid grid-cols-2 gap-5"
+                    className="grid grid-cols-1 sm:grid-cols-2 gap-5"
                 >
                     {[
                         { icon: <Target size={28} />, title: 'Strategic Implementation', desc: "We don't just plug in software; we re-architect your workflows for maximum efficiency.", mt: false },
