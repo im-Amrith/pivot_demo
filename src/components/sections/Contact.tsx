@@ -71,16 +71,16 @@ const Contact = () => (
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             <div className="space-y-2">
                                 <label className="text-xs font-bold uppercase tracking-widest text-slate-500">First Name</label>
-                                <input className="w-full rounded border-slate-200 bg-slate-50 p-3 focus:border-primary focus:ring-primary outline-none transition-colors" placeholder="John" type="text" />
+                                <input className="w-full rounded border-slate-200 bg-slate-50 p-3 focus:border-primary focus:ring-primary outline-none transition-colors"  type="text" />
                             </div>
                             <div className="space-y-2">
                                 <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Last Name</label>
-                                <input className="w-full rounded border-slate-200 bg-slate-50 p-3 focus:border-primary focus:ring-primary outline-none transition-colors" placeholder="Doe" type="text" />
+                                <input className="w-full rounded border-slate-200 bg-slate-50 p-3 focus:border-primary focus:ring-primary outline-none transition-colors" type="text" />
                             </div>
                         </div>
                         <div className="space-y-2">
                             <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Company Email</label>
-                            <input className="w-full rounded border-slate-200 bg-slate-50 p-3 focus:border-primary focus:ring-primary outline-none transition-colors" placeholder="john@company.com" type="email" />
+                            <input className="w-full rounded border-slate-200 bg-slate-50 p-3 focus:border-primary focus:ring-primary outline-none transition-colors"  type="email" />
                         </div>
                         <div className="space-y-2">
                             <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Project Type</label>
