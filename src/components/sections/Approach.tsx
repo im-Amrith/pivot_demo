@@ -97,7 +97,7 @@ const Approach = () => {
             <motion.div
                 animate={{
                     background: `radial-gradient(ellipse 80% 60% at 70% 50%, ${['rgba(56,189,248,0.08)', 'rgba(99,102,241,0.08)', 'rgba(139,92,246,0.08)',
-                            'rgba(16,185,129,0.08)', 'rgba(245,158,11,0.08)', 'rgba(244,63,94,0.08)'][activeStep]
+                        'rgba(16,185,129,0.08)', 'rgba(245,158,11,0.08)', 'rgba(244,63,94,0.08)'][activeStep]
                         }, transparent)`,
                 }}
                 transition={{ duration: 0.6 }}
@@ -140,8 +140,8 @@ const Approach = () => {
                                     key={i}
                                     onClick={() => setActiveStep(i)}
                                     className={`relative flex-shrink-0 snap-start flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-bold transition-all duration-200 ${isActive
-                                            ? 'text-white bg-blue-500/10 border border-blue-400/40'
-                                            : 'text-slate-500 border border-transparent hover:text-slate-300'
+                                        ? 'text-white bg-blue-500/10 border border-blue-400/40'
+                                        : 'text-slate-500 border border-transparent hover:text-slate-300'
                                         }`}
                                 >
                                     <Icon size={16} />
@@ -172,8 +172,8 @@ const Approach = () => {
                                         />
                                     )}
                                     <div className={`relative z-10 w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-200 ${isActive
-                                            ? 'bg-blue-500/20 text-blue-400 shadow-lg shadow-blue-500/10'
-                                            : 'bg-white/5 text-slate-500'
+                                        ? 'bg-blue-500/20 text-blue-400 shadow-lg shadow-blue-500/10'
+                                        : 'bg-white/5 text-slate-500'
                                         }`}>
                                         <Icon size={20} />
                                     </div>
@@ -192,7 +192,7 @@ const Approach = () => {
 
                     {/* ── Right: Viewer Card ── */}
                     <div className="lg:w-[62%]">
-                        <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 md:p-10 min-h-[380px] relative overflow-hidden">
+                        <div className="bg-white/5 max-md:backdrop-blur-md backdrop-blur-xl border border-white/10 rounded-2xl p-8 md:p-10 min-h-[380px] relative overflow-hidden will-change-transform">
                             {/* Subtle corner glow */}
                             <div className={`absolute -top-20 -right-20 w-60 h-60 rounded-full bg-gradient-to-br ${active.accent} opacity-10 blur-3xl pointer-events-none transition-all duration-500`} />
 

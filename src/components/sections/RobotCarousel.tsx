@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Canvas } from '@react-three/fiber';
-import { ContactShadows, Environment } from '@react-three/drei';
+import { ContactShadows, Environment, BakeShadows } from '@react-three/drei';
 import { ChevronLeft, ChevronRight, Info } from 'lucide-react';
 import AIAgentCore from '../3d/AIAgentCore';
 import type { AgentType } from '../3d/AgentProps';
@@ -75,7 +75,7 @@ const RobotCarousel = () => {
                                     rotateY: displayOffset * -15,
                                 }}
                                 transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                                className="absolute w-[320px] h-[480px] rounded-3xl shadow-2xl overflow-hidden flex flex-col"
+                                className="absolute w-[320px] h-[480px] rounded-3xl shadow-2xl overflow-hidden flex flex-col will-change-transform"
                                 style={{ backgroundColor: agent.color }}
                             >
                                 <div className="absolute top-4 right-4 text-white/50">
@@ -85,6 +85,7 @@ const RobotCarousel = () => {
                                 <div className="h-1/2 relative">
                                     <Canvas
                                         shadows
+                                        dpr={[1, 1.5]}
                                         camera={{ position: [0, 0.5, 3.2], fov: 35 }}
                                         gl={{ alpha: true, antialias: true }}
                                         style={{ background: 'transparent' }}
@@ -114,6 +115,7 @@ const RobotCarousel = () => {
                                             blur={2.5}
                                             far={1.5}
                                         />
+                                        <BakeShadows />
                                     </Canvas>
                                 </div>
 

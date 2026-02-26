@@ -66,7 +66,7 @@ const ScrollytellingAbout = () => {
     return (
         <div ref={containerRef} className="relative h-[300vh] bg-[#0f172a]">
             {/* Sticky viewport trap */}
-            <div className="sticky top-0 h-screen flex items-center overflow-hidden">
+            <div className="sticky top-0 h-screen flex items-center overflow-hidden will-change-transform">
                 {/* Ambient background gradients */}
                 <div className="absolute inset-0 pointer-events-none">
                     <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-blue-900/20 blur-3xl" />

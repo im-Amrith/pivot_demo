@@ -49,7 +49,7 @@ const WhyUs = () => (
                                 borderColor: 'rgba(56,189,248,0.5)',
                                 transition: PIVOT_SPRING,
                             }}
-                            className={`group bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-2xl p-8 transition-[border-color] duration-300 cursor-default ${item.mt ? 'lg:mt-10' : ''}`}
+                            className={`group bg-white/[0.02] max-md:backdrop-blur-sm backdrop-blur-xl border border-white/10 rounded-2xl p-8 transition-[border-color] duration-300 cursor-default will-change-transform ${item.mt ? 'lg:mt-10' : ''}`}
                         >
                             {/* Icon in glowing container */}
                             <motion.div

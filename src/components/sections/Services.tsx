@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useCallback } from 'react';
 import { motion } from 'motion/react';
 import {
     Settings,
@@ -34,13 +34,18 @@ const services = [
 
 const Services = () => {
     const gridRef = useRef<HTMLDivElement>(null);
-    const [spotlight, setSpotlight] = useState({ x: 0, y: 0, visible: false });
+    const spotlightRef = useRef<HTMLDivElement>(null);
 
-    const handleMouseMove = (e: React.MouseEvent) => {
-        if (!gridRef.current) return;
+    const handleMouseMove = useCallback((e: React.MouseEvent) => {
+        if (!gridRef.current || !spotlightRef.current) return;
         const { left, top } = gridRef.current.getBoundingClientRect();
-        setSpotlight({ x: e.clientX - left, y: e.clientY - top, visible: true });
-    };
+        spotlightRef.current.style.opacity = '1';
+        spotlightRef.current.style.background = `radial-gradient(500px circle at ${e.clientX - left}px ${e.clientY - top}px, rgba(56,189,248,0.07), transparent 60%)`;
+    }, []);
+
+    const handleMouseLeave = useCallback(() => {
+        if (spotlightRef.current) spotlightRef.current.style.opacity = '0';
+    }, []);
 
     return (
         <section className="bg-background-light py-24" id="services">
@@ -71,23 +76,20 @@ const Services = () => {
                     viewport={VIEWPORT}
                     variants={bentoContainer}
                     onMouseMove={handleMouseMove}
-                    onMouseLeave={() => setSpotlight((s) => ({ ...s, visible: false }))}
+                    onMouseLeave={handleMouseLeave}
                     className="relative grid grid-cols-1 md:grid-cols-3 gap-5 auto-rows-auto"
                 >
                     {/* ── Cursor-tracking spotlight glow ── */}
                     <div
-                        className="pointer-events-none absolute -inset-4 z-0 transition-opacity duration-300"
-                        style={{
-                            opacity: spotlight.visible ? 1 : 0,
-                            background: `radial-gradient(500px circle at ${spotlight.x}px ${spotlight.y}px, rgba(56,189,248,0.07), transparent 60%)`,
-                        }}
+                        ref={spotlightRef}
+                        className="pointer-events-none absolute -inset-4 z-0 transition-opacity duration-300 opacity-0 will-change-[background]"
                     />
 
                     {services.map((service, i) => (
                         <motion.div
                             key={i}
                             variants={bentoFadeUp}
-                            className={`group relative z-10 rounded-2xl bg-gradient-to-br from-white/80 to-white/30 border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-8 transition-all duration-300 ease-out hover:border-blue-200 hover:shadow-[0_8px_30px_rgba(56,189,248,0.08)] ${service.span}`}
+                            className={`group relative z-10 rounded-2xl bg-gradient-to-br from-white/80 to-white/30 border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-8 transition-all duration-300 ease-out hover:border-blue-200 hover:shadow-[0_8px_30px_rgba(56,189,248,0.08)] will-change-transform ${service.span}`}
                         >
                             {/* Squircle icon container */}
                             <div className="mb-6 inline-flex items-center justify-center w-14 h-14 rounded-[14px] bg-primary/8 text-primary shadow-inner border border-primary/10 transition-all duration-300 group-hover:bg-primary/15 group-hover:border-primary/25 group-hover:shadow-[inset_0_2px_4px_rgba(56,189,248,0.2)]">

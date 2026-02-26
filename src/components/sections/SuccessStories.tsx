@@ -41,7 +41,7 @@ const CaseCard = ({ study }: { study: (typeof caseStudies)[0] }) => {
             onMouseLeave={() => setExpanded(false)}
             whileHover={{ y: -8, borderColor: 'rgba(56, 189, 248, 0.4)' }}
             transition={CASE_SPRING}
-            className="relative bg-white/[0.02] backdrop-blur-2xl border border-white/[0.05] rounded-3xl p-8 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] transition-shadow duration-300 cursor-default hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.1),0_8px_32px_rgba(56,189,248,0.08)]"
+            className="relative bg-white/[0.02] max-md:backdrop-blur-md backdrop-blur-2xl border rounded-3xl p-8 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] transition-shadow duration-300 cursor-default will-change-transform hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.1),0_8px_32px_rgba(56,189,248,0.08)]"
         >
             {/* Agent badge */}
             <div className="inline-flex items-center gap-1.5 bg-blue-500/10 text-blue-400 border border-blue-500/20 text-[10px] tracking-widest uppercase px-3 py-1 rounded-full font-bold mb-6">

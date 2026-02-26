@@ -4,7 +4,7 @@ import { RevealText, SPRING, VIEWPORT, staggerContainer, fadeSlideUp } from '../
 
 /* ─── Floating UI Pill 1: Chat / Approval Node ─── */
 const ChatPill = () => (
-    <div className="w-full max-w-72 rounded-2xl backdrop-blur-md bg-white/70 border border-gray-200 shadow-xl shadow-slate-200/50 p-5">
+    <div className="w-full max-w-72 rounded-2xl max-md:backdrop-blur-sm backdrop-blur-md max-md:bg-white/90 bg-white/70 border border-gray-200 shadow-xl shadow-slate-200/50 p-5">
         <div className="flex items-center gap-3 mb-4">
             <div className="size-9 rounded-full bg-gradient-to-br from-primary to-indigo-500 flex items-center justify-center text-white text-xs font-bold shadow-md shadow-primary/30">
                 AI
@@ -35,7 +35,7 @@ const ChatPill = () => (
 
 /* ─── Floating UI Pill 2: Data-Sync Progress ─── */
 const SyncPill = () => (
-    <div className="w-full max-w-64 rounded-2xl backdrop-blur-md bg-white/70 border border-gray-200 shadow-xl shadow-slate-200/50 p-5">
+    <div className="w-full max-w-64 rounded-2xl max-md:backdrop-blur-sm backdrop-blur-md max-md:bg-white/90 bg-white/70 border border-gray-200 shadow-xl shadow-slate-200/50 p-5">
         <div className="flex items-center justify-between mb-3">
             <p className="text-xs font-bold text-slate-800 tracking-wide">System Sync</p>
             <span className="text-[10px] font-bold text-primary">87%</span>
