@@ -1,5 +1,4 @@
-import { motion, useScroll, useTransform } from 'motion/react';
-import { useRef } from 'react';
+import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { RevealText, SPRING, VIEWPORT, staggerContainer, fadeSlideUp } from '../ui/MotionKit';
 
@@ -69,17 +68,8 @@ const SyncPill = () => (
 );
 
 const Partnership = () => {
-    const sectionRef = useRef<HTMLElement>(null);
-    const { scrollYProgress } = useScroll({
-        target: sectionRef,
-        offset: ['start end', 'end start'],
-    });
-
-    const pillY1 = useTransform(scrollYProgress, [0, 1], [50, -50]);
-    const pillY2 = useTransform(scrollYProgress, [0, 1], [70, -30]);
-
     return (
-        <section ref={sectionRef} className="py-24 bg-slate-50 overflow-hidden">
+        <section className="py-24 bg-slate-50 overflow-hidden">
             <div className="mx-auto max-w-7xl px-6">
                 <div className="flex flex-col lg:flex-row gap-16 items-center">
 
@@ -135,15 +125,14 @@ const Partnership = () => {
                     </motion.div>
 
                     {/* ── Right Column: Floating Parallax UI Pills ── */}
-                    <div className="lg:w-1/2 relative min-h-[300px] md:min-h-[400px] flex flex-col md:block items-center gap-6">
+                    <div className="relative w-full lg:w-1/2 flex flex-col sm:flex-row lg:block gap-6 justify-center items-center min-h-[300px] lg:min-h-[450px]">
                         {/* Decorative blurred backdrop circle */}
                         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                             <div className="w-80 h-80 rounded-full bg-primary/8 blur-3xl" />
                         </div>
 
-                        {/* Pill 1: Chat / Approval — top right, faster float */}
+                        {/* Pill 1: Chat / Approval — stacks on mobile, overlaps top-right on desktop */}
                         <motion.div
-                            style={{ y: pillY1 }}
                             animate={{ y: [0, -15, 0] }}
                             transition={{
                                 y: { duration: 3, repeat: Infinity, ease: 'easeInOut' },
@@ -151,14 +140,13 @@ const Partnership = () => {
                             initial={{ opacity: 0, x: 30 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={VIEWPORT}
-                            className="relative md:absolute top-0 right-0 lg:top-4 lg:right-0 z-20"
+                            className="relative w-full max-w-sm z-20 lg:absolute lg:top-0 lg:right-0 lg:w-[400px]"
                         >
                             <ChatPill />
                         </motion.div>
 
-                        {/* Pill 2: Data Sync — bottom left, slower float (out of sync) */}
+                        {/* Pill 2: Data Sync — stacks on mobile, overlaps bottom-left on desktop */}
                         <motion.div
-                            style={{ y: pillY2 }}
                             animate={{ y: [0, -12, 0] }}
                             transition={{
                                 y: { duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 0.8 },
@@ -166,7 +154,7 @@ const Partnership = () => {
                             initial={{ opacity: 0, x: -30 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={VIEWPORT}
-                            className="relative md:absolute bottom-0 left-0 lg:bottom-4 lg:left-0 z-10"
+                            className="relative w-full max-w-sm z-10 lg:absolute lg:bottom-10 lg:-left-10 lg:w-[350px] lg:z-20"
                         >
                             <SyncPill />
                         </motion.div>

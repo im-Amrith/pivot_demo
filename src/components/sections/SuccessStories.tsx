@@ -1,99 +1,121 @@
+import { useState } from 'react';
 import { motion } from 'motion/react';
-import { ChevronLeft, ChevronRight, Home, Truck } from 'lucide-react';
-import { RevealText, SPRING, VIEWPORT, staggerContainer, scaleIn } from '../ui/MotionKit';
-import MagneticButton from '../ui/MagneticButton';
+import { RevealText, SPRING, VIEWPORT, staggerContainer } from '../ui/MotionKit';
+
+const CASE_SPRING = { type: 'spring' as const, stiffness: 120, damping: 18 };
+
+const caseStudies = [
+    {
+        agent: 'AI Interviewer Agent',
+        metric: '80% Reduction in Screening Time',
+        title: 'Vantage: Autonomous Tech Recruitment',
+        description: 'Deployed the AI Interviewer to conduct tier-1 technical screenings, providing standardized scoring and honest feedback to candidates instantly.',
+    },
+    {
+        agent: 'Custom BPA Agent',
+        metric: '40% Faster Engineering Cycles',
+        title: 'Velocitas: Dual-Mode AI Workflow',
+        description: 'Integrated a custom dual-mode AI workflow system directly into the engineering team\'s pipeline, automating routine pull-request checks and deployment staging.',
+    },
+    {
+        agent: 'Minutes of Meeting AI',
+        metric: '100% Action Item Capture',
+        title: 'TeamSync: Intelligent Workflow Extension',
+        description: 'Utilized the silent ninja agent to listen, note, and recap cross-department syncs, instantly routing action items to Jira and Slack without manual input.',
+    },
+];
+
+const cardVariant = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: CASE_SPRING },
+};
+
+const CaseCard = ({ study }: { study: (typeof caseStudies)[0] }) => {
+    const [expanded, setExpanded] = useState(false);
+
+    return (
+        <motion.div
+            layout
+            variants={cardVariant}
+            onMouseEnter={() => setExpanded(true)}
+            onMouseLeave={() => setExpanded(false)}
+            className={`relative bg-white/5 backdrop-blur-xl border rounded-2xl p-8 transition-colors duration-300 cursor-default ${expanded ? 'border-blue-500/50 shadow-lg shadow-blue-500/10' : 'border-white/10'
+                }`}
+        >
+            {/* Agent badge */}
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-5">
+                <div className="size-1.5 rounded-full bg-primary animate-pulse" />
+                <span className="text-[10px] font-bold uppercase tracking-widest text-primary">{study.agent}</span>
+            </div>
+
+            {/* Metric */}
+            <p className="text-3xl md:text-4xl font-black text-white tracking-tight mb-3">{study.metric}</p>
+
+            {/* Title */}
+            <h3 className="text-lg font-bold text-slate-300 mb-2">{study.title}</h3>
+
+            {/* Expandable description */}
+            <motion.div
+                initial={false}
+                animate={{
+                    height: expanded ? 'auto' : 0,
+                    opacity: expanded ? 1 : 0,
+                }}
+                transition={CASE_SPRING}
+                className="overflow-hidden"
+            >
+                <p className="text-sm text-slate-400 leading-relaxed pt-3 border-t border-white/5">
+                    {study.description}
+                </p>
+            </motion.div>
+
+            {/* Hover hint */}
+            <motion.p
+                animate={{ opacity: expanded ? 0 : 0.4 }}
+                className="text-[10px] text-slate-500 mt-4 uppercase tracking-widest font-bold"
+            >
+                Hover to read more →
+            </motion.p>
+        </motion.div>
+    );
+};
 
 const SuccessStories = () => (
-    <section className="py-24 overflow-hidden" id="success">
+    <section className="py-24 bg-slate-900 overflow-hidden" id="success">
         <div className="mx-auto max-w-7xl px-6">
-            <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={VIEWPORT}
-                    transition={SPRING.gentle}
+            {/* Header */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={VIEWPORT}
+                transition={SPRING.gentle}
+                className="mb-16 text-center"
+            >
+                <RevealText className="inline-block">
+                    <h2 className="text-4xl font-black tracking-tight text-white">Case Studies</h2>
+                </RevealText>
+                <motion.p
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ ...SPRING.default, delay: 0.12 }}
+                    className="mt-4 text-slate-400 max-w-xl mx-auto"
                 >
-                    <RevealText>
-                        <h2 className="text-4xl font-black text-slate-900">Success Stories</h2>
-                    </RevealText>
-                    <motion.p
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ ...SPRING.default, delay: 0.12 }}
-                        className="mt-4 text-slate-600"
-                    >
-                        Real-world results for our partners.
-                    </motion.p>
-                </motion.div>
-                <div className="flex gap-4">
-                    <MagneticButton className="size-12 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-50 transition-colors">
-                        <ChevronLeft size={24} />
-                    </MagneticButton>
-                    <MagneticButton className="size-12 rounded-full bg-slate-900 text-white flex items-center justify-center hover:bg-slate-800 transition-colors">
-                        <ChevronRight size={24} />
-                    </MagneticButton>
-                </div>
-            </div>
+                    Real results from real deployments. See how our AI agents transformed operations for businesses like yours.
+                </motion.p>
+            </motion.div>
+
+            {/* Expanding grid */}
             <motion.div
                 initial="hidden"
                 whileInView="visible"
                 viewport={VIEWPORT}
                 variants={staggerContainer(0.2)}
-                className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16"
+                className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start"
             >
-                {[
-                    { tag: 'FINTECH', title: 'Digital Mortgage Processing', desc: 'Automated document verification for a leading housing finance firm.', stat: '80%', statDesc: 'Reduction in TAT', icon: <Home size={48} />, color: 'bg-primary/10', textColor: 'text-primary', image: 'input_file_0.png' },
-                    { tag: 'SUPPLY CHAIN', title: 'Supply Chain Sync', desc: 'Real-time inventory automation across 12 distribution centers.', stat: '60%', statDesc: 'Cost Savings', icon: <Truck size={48} />, color: 'bg-orange-500/10', textColor: 'text-orange-500', image: 'input_file_1.png' },
-                ].map((story, i) => (
-                    <motion.div
-                        key={i}
-                        variants={scaleIn}
-                        whileHover={{ y: -8, transition: SPRING.snappy }}
-                        className="group cursor-pointer overflow-hidden rounded-xl border border-white/20 bg-white/40 backdrop-blur-md shadow-sm transition-[border-color,box-shadow] duration-300 hover:shadow-2xl hover:border-sky-500/40"
-                    >
-                        <div className="aspect-video w-full bg-slate-200 overflow-hidden relative">
-                            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent z-10" />
-                            <motion.img
-                                src={story.image}
-                                alt={story.title}
-                                className="h-full w-full object-cover"
-                                whileHover={{ scale: 1.08 }}
-                                transition={{ duration: 0.7, ease: [0.33, 1, 0.68, 1] }}
-                                referrerPolicy="no-referrer"
-                            />
-                        </div>
-                        <div className="p-8 relative">
-                            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                            <div className="relative z-10">
-                                <div className={`mb-4 inline-block rounded-full ${story.color} px-3 py-1 text-xs font-bold ${story.textColor}`}>{story.tag}</div>
-                                <h3 className="text-2xl font-black text-slate-900">{story.title}</h3>
-                                <p className="mt-4 text-slate-500">{story.desc}</p>
-                                <div className={`mt-6 flex items-center gap-2 font-black ${story.textColor}`}>
-                                    <motion.span
-                                        initial={{ opacity: 0, scale: 0.8 }}
-                                        whileInView={{ opacity: 1, scale: 1 }}
-                                        viewport={{ once: true }}
-                                        transition={{ ...SPRING.snappy, delay: i * 0.2 + 0.3 }}
-                                        className="text-3xl"
-                                    >
-                                        {story.stat}
-                                    </motion.span>
-                                    <span className="text-sm font-medium text-slate-500">{story.statDesc}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </motion.div>
+                {caseStudies.map((study, i) => (
+                    <CaseCard key={i} study={study} />
                 ))}
-            </motion.div>
-            <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={VIEWPORT}
-                variants={staggerContainer(0.08)}
-                className="flex flex-wrap items-center justify-center gap-8 md:gap-12 opacity-50 grayscale transition-all hover:grayscale-0 hover:opacity-100"
-            >
-                
             </motion.div>
         </div>
     </section>
