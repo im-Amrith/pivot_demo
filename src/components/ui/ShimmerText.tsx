@@ -5,7 +5,7 @@ const ShimmerText = ({ text }: { text: string }) => {
 
     return (
         <div className="relative cursor-default">
-            <h1 className="relative z-10 text-5xl font-black leading-[1.1] tracking-tight text-slate-200 lg:text-7xl neo-kerning">
+            <h1 className="relative z-10 text-4xl sm:text-5xl lg:text-7xl xl:text-8xl font-black leading-[1.1] tracking-tight text-slate-200 neo-kerning break-words hyphens-auto">
                 {words.map((word, i) => (
                     <span key={i} className="relative inline-block mr-[0.25em] last:mr-0">
                         {/* Base Text Layer */}
