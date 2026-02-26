@@ -30,12 +30,12 @@ const Hero = () => {
             <WebGLBackground />
 
             <div className="mx-auto max-w-7xl px-6 w-full">
-                <div className="grid items-center gap-12 lg:grid-cols-2">
+                <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-8 overflow-hidden">
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        className="flex flex-col gap-8"
+                        className="w-full flex-shrink-0 relative z-10 pr-0 lg:pr-4 flex flex-col gap-8 overflow-hidden"
                     >
                         <div className="inline-flex w-fit items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary">
                             <span className="relative flex h-2 w-2">
@@ -74,7 +74,7 @@ const Hero = () => {
                         initial={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        className="relative hidden lg:block"
+                        className="relative z-0 hidden lg:block overflow-hidden"
                     >
                         <ProductCarousel />
                     </motion.div>
