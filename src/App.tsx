@@ -1,6 +1,7 @@
 import Navbar from './components/sections/Navbar';
 import Hero from './components/sections/Hero';
 import Stats from './components/sections/Stats';
+import ScrollytellingAbout from './components/sections/ScrollytellingAbout';
 import Approach from './components/sections/Approach';
 import RobotCarousel from './components/sections/RobotCarousel';
 import Services from './components/sections/Services';
@@ -18,6 +19,7 @@ export default function App() {
       <Navbar />
       <Hero />
       <Stats />
+      <ScrollytellingAbout />
       <Approach />
       <RobotCarousel />
       <Services />
