@@ -27,18 +27,18 @@ const ScrollytellingAbout = () => {
         offset: ['start start', 'end end'],
     });
 
-    /* ── Text block transforms (3 phases: 0→0.33, 0.33→0.66, 0.66→1) ── */
-    // Block 1: visible at 0–0.3, fades out 0.3–0.4
-    const opacity1 = useTransform(scrollYProgress, [0, 0.05, 0.28, 0.38], [0, 1, 1, 0]);
-    const y1 = useTransform(scrollYProgress, [0, 0.05, 0.28, 0.38], [40, 0, 0, -40]);
+    /* ── Text block transforms (3 phases with clean gaps — no overlap) ── */
+    // Block 1: fades in 0–0.05, visible 0.05–0.25, fades out 0.25–0.30
+    const opacity1 = useTransform(scrollYProgress, [0, 0.05, 0.25, 0.30], [0, 1, 1, 0]);
+    const y1 = useTransform(scrollYProgress, [0, 0.05, 0.25, 0.30], [30, 0, 0, -20]);
 
-    // Block 2: fades in 0.3–0.4, visible 0.4–0.6, fades out 0.6–0.7
-    const opacity2 = useTransform(scrollYProgress, [0.3, 0.4, 0.58, 0.68], [0, 1, 1, 0]);
-    const y2 = useTransform(scrollYProgress, [0.3, 0.4, 0.58, 0.68], [40, 0, 0, -40]);
+    // Block 2: fades in 0.34–0.39, visible 0.39–0.58, fades out 0.58–0.63
+    const opacity2 = useTransform(scrollYProgress, [0.34, 0.39, 0.58, 0.63], [0, 1, 1, 0]);
+    const y2 = useTransform(scrollYProgress, [0.34, 0.39, 0.58, 0.63], [30, 0, 0, -20]);
 
-    // Block 3: fades in 0.6–0.7, stays visible
-    const opacity3 = useTransform(scrollYProgress, [0.6, 0.7, 0.95, 1], [0, 1, 1, 0.8]);
-    const y3 = useTransform(scrollYProgress, [0.6, 0.7, 0.95, 1], [40, 0, 0, 0]);
+    // Block 3: fades in 0.67–0.72, stays visible
+    const opacity3 = useTransform(scrollYProgress, [0.67, 0.72, 0.95, 1], [0, 1, 1, 0.85]);
+    const y3 = useTransform(scrollYProgress, [0.67, 0.72, 0.95, 1], [30, 0, 0, 0]);
 
     const textTransforms = [
         { opacity: opacity1, y: y1 },
@@ -163,22 +163,18 @@ const ScrollytellingAbout = () => {
                             <div className="absolute -inset-4 rounded-[inherit] bg-gradient-to-br from-primary/20 to-indigo-500/10 blur-2xl -z-10" />
                         </motion.div>
 
-                        {/* Floating data points */}
+                        {/* Floating data points — one per phase, shown exclusively */}
                         {[
-                            { x: '-20%', y: '-30%', delay: 0, label: '40% faster' },
-                            { x: '25%', y: '35%', delay: 0.3, label: 'Zero errors' },
-                            { x: '-35%', y: '25%', delay: 0.6, label: '24/7 uptime' },
+                            { label: '40% faster',  range: [0.05, 0.10, 0.25, 0.30] },
+                            { label: 'Zero errors',  range: [0.39, 0.44, 0.58, 0.63] },
+                            { label: '24/7 uptime', range: [0.72, 0.77, 0.92, 0.97] },
                         ].map((point, i) => (
                             <motion.div
                                 key={i}
                                 style={{
-                                    opacity: useTransform(scrollYProgress, [0.2 + i * 0.15, 0.3 + i * 0.15], [0, 1]),
-                                    x: point.x,
-                                    y: point.y,
+                                    opacity: useTransform(scrollYProgress, point.range, [0, 1, 1, 0]),
                                 }}
-                                animate={{ y: [point.y, `calc(${point.y} - 8px)`, point.y] }}
-                                transition={{ duration: 3 + i, repeat: Infinity, ease: 'easeInOut' }}
-                                className="absolute px-3 py-1.5 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-[11px] font-bold text-primary/80"
+                                className="absolute bottom-[15%] left-1/2 -translate-x-1/2 px-4 py-2 rounded-full bg-white/[0.06] border border-white/10 text-xs font-bold text-primary/90 whitespace-nowrap"
                             >
                                 {point.label}
                             </motion.div>
