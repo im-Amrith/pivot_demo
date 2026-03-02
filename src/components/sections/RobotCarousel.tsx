@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Canvas } from '@react-three/fiber';
-import { ContactShadows, Environment, BakeShadows } from '@react-three/drei';
+import { ContactShadows, BakeShadows } from '@react-three/drei';
 import { ChevronLeft, ChevronRight, Info } from 'lucide-react';
 import AIAgentCore from '../3d/AIAgentCore';
 import type { AgentType } from '../3d/AgentProps';
@@ -83,14 +83,16 @@ const RobotCarousel = () => {
                                 </div>
 
                                 <div className="h-1/2 relative">
+                                    {absDisplayOffset <= 1 ? (
                                     <Canvas
                                         shadows
                                         dpr={[1, 1.5]}
                                         camera={{ position: [0, 0.5, 3.2], fov: 35 }}
                                         gl={{ alpha: true, antialias: true }}
                                         style={{ background: 'transparent' }}
+                                        frameloop={isActive ? 'always' : 'demand'}
                                     >
-                                        <ambientLight intensity={0.4} />
+                                        <ambientLight intensity={0.6} />
                                         <directionalLight
                                             position={[5, 5, 5]}
                                             intensity={1.2}
@@ -100,8 +102,7 @@ const RobotCarousel = () => {
                                         />
                                         <pointLight position={[-3, 2, 4]} intensity={0.6} color="#ffffff" />
                                         <pointLight position={[2, -1, 3]} intensity={0.4} color={agent.color} />
-
-                                        <Environment preset="city" />
+                                        <hemisphereLight args={['#b1e1ff', '#080820', 0.5]} />
 
                                         <AIAgentCore
                                             color={agent.color === '#f43f5e' ? '#ff6b8a' : agent.color}
@@ -117,6 +118,14 @@ const RobotCarousel = () => {
                                         />
                                         <BakeShadows />
                                     </Canvas>
+                                    ) : (
+                                    <div className="w-full h-full flex items-center justify-center">
+                                        <div
+                                            className="w-20 h-20 rounded-full opacity-40 blur-xl"
+                                            style={{ backgroundColor: agent.color }}
+                                        />
+                                    </div>
+                                    )}
                                 </div>
 
                                 <div className="p-8 flex-1 flex flex-col text-white text-center">
@@ -131,9 +140,12 @@ const RobotCarousel = () => {
                                         ))}
                                     </div>
 
-                                    <button className="w-full py-3 rounded-xl bg-white/20 hover:bg-white/30 transition-all font-bold text-sm mt-4">
+                                    <a
+                                        href={`#case-${agent.type}`}
+                                        className="block w-full py-3 rounded-xl bg-white/20 hover:bg-white/30 transition-all font-bold text-sm mt-4 text-center"
+                                    >
                                         Explore {agent.name}
-                                    </button>
+                                    </a>
                                 </div>
                             </motion.div>
                         );

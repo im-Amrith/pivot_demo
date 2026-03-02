@@ -10,8 +10,7 @@ import {
 } from 'lucide-react';
 import { RevealText, SPRING, VIEWPORT } from '../ui/MotionKit';
 
-const TAB_SPRING = { type: 'spring' as const, stiffness: 200, damping: 25 };
-const CONTENT_TRANSITION = { type: 'spring' as const, stiffness: 100, damping: 20 };
+const TAB_SPRING = { type: 'spring' as const, stiffness: 500, damping: 40 };
 
 const steps = [
     {
@@ -62,9 +61,10 @@ const StepVisual = ({ step }: { step: (typeof steps)[0] }) => (
         </div>
         <div className="h-2 w-full rounded-full bg-white/5 overflow-hidden">
             <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: `${step.progress}%` }}
-                transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.4, ease: [0.33, 1, 0.68, 1] }}
+                style={{ originX: 0, width: `${step.progress}%` }}
                 className={`h-full rounded-full bg-gradient-to-r ${step.accent}`}
             />
         </div>
@@ -74,10 +74,10 @@ const StepVisual = ({ step }: { step: (typeof steps)[0] }) => (
             {step.nodes.map((node, i) => (
                 <motion.div
                     key={node}
-                    initial={{ opacity: 0, scale: 0.8, y: 10 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    transition={{ ...CONTENT_TRANSITION, delay: i * 0.08 }}
-                    className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg px-3 py-2.5 text-center text-xs font-bold text-slate-300 hover:border-blue-400/40 hover:text-white transition-all duration-200"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.2, delay: i * 0.03 }}
+                    className="bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-center text-xs font-bold text-slate-300 hover:border-blue-400/40 hover:text-white transition-colors duration-200"
                 >
                     {node}
                 </motion.div>
@@ -192,34 +192,45 @@ const Approach = () => {
 
                     {/* ── Right: Viewer Card ── */}
                     <div className="lg:w-[62%]">
-                        <div className="bg-white/5 max-md:backdrop-blur-md backdrop-blur-xl border border-white/10 rounded-2xl p-8 md:p-10 min-h-[380px] relative overflow-hidden will-change-transform">
+                        <div className="bg-white/[0.04] border border-white/10 rounded-2xl p-8 md:p-10 min-h-[380px] relative overflow-hidden">
                             {/* Subtle corner glow */}
-                            <div className={`absolute -top-20 -right-20 w-60 h-60 rounded-full bg-gradient-to-br ${active.accent} opacity-10 blur-3xl pointer-events-none transition-all duration-500`} />
+                            <div
+                                className="absolute -top-20 -right-20 w-60 h-60 rounded-full opacity-10 blur-3xl pointer-events-none"
+                                style={{
+                                    background: `linear-gradient(135deg, var(--glow-from), var(--glow-to))`,
+                                    '--glow-from': ['#38bdf8','#60a5fa','#818cf8','#34d399','#f59e0b','#f43f5e'][activeStep],
+                                    '--glow-to': ['#3b82f6','#6366f1','#8b5cf6','#22c55e','#f97316','#ec4899'][activeStep],
+                                    transition: 'background 0.4s ease',
+                                } as React.CSSProperties}
+                            />
 
-                            <AnimatePresence mode="wait">
-                                <motion.div
-                                    key={activeStep}
-                                    initial={{ opacity: 0, y: 12 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -12 }}
-                                    transition={CONTENT_TRANSITION}
-                                >
-                                    {/* Step indicator */}
-                                    <div className="flex items-center gap-3 mb-6">
-                                        <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${active.accent} flex items-center justify-center text-white shadow-lg`}>
-                                            <ActiveIcon size={24} />
+                            <div className="relative" style={{ minHeight: 280 }}>
+                                <AnimatePresence initial={false} mode="popLayout">
+                                    <motion.div
+                                        key={activeStep}
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        transition={{ duration: 0.18, ease: 'easeOut' }}
+                                        className="will-change-[opacity]"
+                                    >
+                                        {/* Step indicator */}
+                                        <div className="flex items-center gap-3 mb-6">
+                                            <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${active.accent} flex items-center justify-center text-white shadow-lg`}>
+                                                <ActiveIcon size={24} />
+                                            </div>
+                                            <div>
+                                                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Step {activeStep + 1} / 6</p>
+                                                <h3 className="text-2xl font-black text-white">{active.title}</h3>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Step {activeStep + 1} / 6</p>
-                                            <h3 className="text-2xl font-black text-white">{active.title}</h3>
-                                        </div>
-                                    </div>
 
-                                    <p className="text-slate-400 leading-relaxed">{active.desc}</p>
+                                        <p className="text-slate-400 leading-relaxed">{active.desc}</p>
 
-                                    <StepVisual step={active} />
-                                </motion.div>
-                            </AnimatePresence>
+                                        <StepVisual step={active} />
+                                    </motion.div>
+                                </AnimatePresence>
+                            </div>
                         </div>
                     </div>
                 </div>

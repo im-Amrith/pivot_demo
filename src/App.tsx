@@ -12,6 +12,7 @@ import TrustedBy from './components/sections/TrustedBy';
 import Contact from './components/sections/Contact';
 import FAQ from './components/sections/FAQ';
 import Footer from './components/sections/Footer';
+import FloatingContactCTA from './components/ui/FloatingContactCTA';
 
 export default function App() {
   return (
@@ -22,7 +23,6 @@ export default function App() {
       <ScrollytellingAbout />
       <Approach />
       <RobotCarousel />
-      <Services />
       <WhyUs />
       <Partnership />
       <SuccessStories />
@@ -30,6 +30,7 @@ export default function App() {
       <Contact />
       <FAQ />
       <Footer />
+      <FloatingContactCTA />
     </div>
   );
 }

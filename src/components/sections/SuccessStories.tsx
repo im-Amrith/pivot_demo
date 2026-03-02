@@ -6,22 +6,46 @@ const CASE_SPRING = { type: 'spring' as const, stiffness: 100, damping: 20 };
 
 const caseStudies = [
     {
-        agent: 'AI Interviewer Agent',
-        metric: '80% Reduction in Screening Time',
-        title: 'Vantage: Autonomous Tech Recruitment',
-        description: 'Deployed the AI Interviewer to conduct tier-1 technical screenings, providing standardized scoring and honest feedback to candidates instantly.',
-    },
-    {
+        slug: 'bpa',
         agent: 'Custom BPA Agent',
         metric: '40% Faster Engineering Cycles',
         title: 'Velocitas: Dual-Mode AI Workflow',
         description: 'Integrated a custom dual-mode AI workflow system directly into the engineering team\'s pipeline, automating routine pull-request checks and deployment staging.',
     },
     {
-        agent: 'Minutes of Meeting AI',
+        slug: 'consulting',
+        agent: 'AI Consulting',
         metric: '100% Action Item Capture',
         title: 'TeamSync: Intelligent Workflow Extension',
-        description: 'Utilized the silent ninja agent to listen, note, and recap cross-department syncs, instantly routing action items to Jira and Slack without manual input.',
+        description: 'Utilized strategic AI consulting to design a silent ninja agent that listens, notes, and recaps cross-department syncs, instantly routing action items to Jira and Slack.',
+    },
+    {
+        slug: 'idp',
+        agent: 'IDP Agent',
+        metric: '95% Faster Document Processing',
+        title: 'FinEdge: Intelligent Invoice Pipeline',
+        description: 'Deployed intelligent document processing to digitize 50,000+ invoices monthly, eliminating manual data entry and reducing processing errors to near zero.',
+    },
+    {
+        slug: 'finance',
+        agent: 'Financial Automation Agent',
+        metric: '3x Faster Month-End Close',
+        title: 'Meridian: Autonomous Reconciliation',
+        description: 'Automated accounts payable and bank reconciliation across 12 entities, cutting month-end close from 15 days to 5 with full audit trail compliance.',
+    },
+    {
+        slug: 'hr',
+        agent: 'HR Automation Agent',
+        metric: '80% Reduction in Screening Time',
+        title: 'Vantage: Autonomous Tech Recruitment',
+        description: 'Deployed the AI Interviewer to conduct tier-1 technical screenings, providing standardized scoring and honest feedback to candidates instantly.',
+    },
+    {
+        slug: 'customer_service',
+        agent: 'Customer Service Agent',
+        metric: '70% Tickets Resolved Autonomously',
+        title: 'NovaCare: 24/7 AI Support Desk',
+        description: 'Launched intelligent support agents handling L1/L2 tickets around the clock, reducing average resolution time from 4 hours to 12 minutes.',
     },
 ];
 
@@ -35,6 +59,7 @@ const CaseCard = ({ study }: { study: (typeof caseStudies)[0] }) => {
 
     return (
         <motion.div
+            id={`case-${study.slug}`}
             layout
             variants={cardVariant}
             onMouseEnter={() => setExpanded(true)}
@@ -125,10 +150,10 @@ const SuccessStories = () => (
                 whileInView="visible"
                 viewport={VIEWPORT}
                 variants={staggerContainer(0.2)}
-                className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start"
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start"
             >
-                {caseStudies.map((study, i) => (
-                    <CaseCard key={i} study={study} />
+                {caseStudies.map((study) => (
+                    <CaseCard key={study.slug} study={study} />
                 ))}
             </motion.div>
         </div>
