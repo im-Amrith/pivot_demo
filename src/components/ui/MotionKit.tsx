@@ -1,5 +1,23 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { motion, useMotionValue, useSpring } from 'motion/react';
+
+/**
+ * Shared mobile detection hook — screens < 768px.
+ * Re-evaluates on resize for responsiveness.
+ */
+export const useIsMobile = (breakpoint = 768) => {
+    const [isMobile, setIsMobile] = useState(
+        typeof window !== 'undefined' ? window.innerWidth < breakpoint : false
+    );
+
+    useEffect(() => {
+        const check = () => setIsMobile(window.innerWidth < breakpoint);
+        window.addEventListener('resize', check, { passive: true });
+        return () => window.removeEventListener('resize', check);
+    }, [breakpoint]);
+
+    return isMobile;
+};
 
 /**
  * Premium spring configs — low stiffness, high damping for
@@ -55,50 +73,40 @@ export const SpotlightCard = ({
     const [hovering, setHovering] = useState(false);
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
+    const isMobile = useIsMobile();
 
-    const handleMouseMove = (e: React.MouseEvent) => {
-        if (!ref.current) return;
+    const handleMouseMove = useCallback((e: React.MouseEvent) => {
+        if (!ref.current || isMobile) return;
         const { left, top } = ref.current.getBoundingClientRect();
         mouseX.set(e.clientX - left);
         mouseY.set(e.clientY - top);
-    };
+    }, [isMobile, mouseX, mouseY]);
 
     const Tag = motion[as] as typeof motion.div;
 
     return (
         <Tag
             ref={ref}
-            onMouseMove={handleMouseMove}
-            onMouseEnter={() => setHovering(true)}
-            onMouseLeave={() => setHovering(false)}
+            onMouseMove={isMobile ? undefined : handleMouseMove}
+            onMouseEnter={isMobile ? undefined : () => setHovering(true)}
+            onMouseLeave={isMobile ? undefined : () => setHovering(false)}
             variants={fadeSlideUp}
-            className={`group relative overflow-hidden rounded-xl backdrop-blur-md border border-white/10 transition-[border-color] duration-300 hover:border-sky-500/50 ${className}`}
+            className={`group relative overflow-hidden rounded-xl max-md:backdrop-blur-sm backdrop-blur-md border border-white/10 transition-[border-color] duration-300 hover:border-sky-500/50 ${className}`}
         >
-            {/* Spotlight gradient that follows cursor */}
-            {hovering && (
-                <motion.div
+            {/* Live spotlight via CSS custom property trick — desktop only */}
+            {!isMobile && (
+                <div
                     className="pointer-events-none absolute -inset-px z-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    style={{
-                        background: `radial-gradient(350px circle at ${mouseX.get()}px ${mouseY.get()}px, rgba(56,189,248,0.12), transparent 60%)`,
-                    }}
-                    // Re-render on mouse move via inline style update
-                    animate={{
-                        background: `radial-gradient(350px circle at var(--mx)px var(--my)px, rgba(56,189,248,0.12), transparent 60%)`,
+                    ref={(el) => {
+                        if (!el) return;
+                        const update = () => {
+                            el.style.background = `radial-gradient(350px circle at ${mouseX.get()}px ${mouseY.get()}px, rgba(56,189,248,0.12), transparent 60%)`;
+                            if (hovering) requestAnimationFrame(update);
+                        };
+                        if (hovering) requestAnimationFrame(update);
                     }}
                 />
             )}
-            {/* Live spotlight via CSS custom property trick */}
-            <div
-                className="pointer-events-none absolute -inset-px z-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                ref={(el) => {
-                    if (!el) return;
-                    const update = () => {
-                        el.style.background = `radial-gradient(350px circle at ${mouseX.get()}px ${mouseY.get()}px, rgba(56,189,248,0.12), transparent 60%)`;
-                        if (hovering) requestAnimationFrame(update);
-                    };
-                    if (hovering) requestAnimationFrame(update);
-                }}
-            />
             <div className="relative z-10">{children}</div>
         </Tag>
     );

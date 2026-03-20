@@ -1,6 +1,6 @@
 import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
-import { RevealText, SPRING, VIEWPORT, staggerContainer, fadeSlideUp } from '../ui/MotionKit';
+import { RevealText, SPRING, VIEWPORT, staggerContainer, fadeSlideUp, useIsMobile } from '../ui/MotionKit';
 
 /* ─── Floating UI Pill 1: Chat / Approval Node ─── */
 const ChatPill = () => (
@@ -68,6 +68,7 @@ const SyncPill = () => (
 );
 
 const Partnership = () => {
+    const isMobile = useIsMobile();
     return (
         <section className="py-24 bg-slate-50 overflow-hidden">
             <div className="mx-auto max-w-7xl px-6">
@@ -83,7 +84,7 @@ const Partnership = () => {
                     >
                         <motion.div variants={fadeSlideUp}>
                             <RevealText>
-                                <h2 className="text-4xl font-black text-slate-900 mb-6">The Human-AI Partnership</h2>
+                                <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-6 break-words">The Human-AI Partnership</h2>
                             </RevealText>
                         </motion.div>
                         <motion.p
@@ -106,7 +107,7 @@ const Partnership = () => {
                                 <motion.div
                                     key={i}
                                     variants={fadeSlideUp}
-                                    whileHover={{ y: -8, transition: SPRING.snappy }}
+                                    whileHover={isMobile ? undefined : { y: -8, transition: SPRING.snappy }}
                                     className="group relative p-6 rounded-xl bg-white transition-all duration-300 ease-out border border-transparent hover:border-blue-400 hover:shadow-2xl hover:shadow-blue-500/20 hover:-translate-y-2 hover:bg-blue-50/30"
                                 >
                                     <div className="relative z-10">

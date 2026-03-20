@@ -22,7 +22,7 @@ const Contact = () => (
                 >
                     <div>
                         <RevealText>
-                            <h2 className="text-4xl font-black text-white">Let's build your <br /><span className="text-primary">future engine.</span></h2>
+                            <h2 className="text-3xl md:text-4xl font-black text-white">Let's build your <br /><span className="text-primary">future engine.</span></h2>
                         </RevealText>
                         <motion.p
                             variants={fadeSlideUp}
@@ -48,7 +48,7 @@ const Contact = () => (
                                 <motion.div
                                     whileHover={{ scale: 1.1 }}
                                     transition={SPRING.snappy}
-                                    className="size-12 rounded bg-white/5 flex items-center justify-center text-primary border border-white/10 transition-[border-color] duration-300 hover:border-sky-500/40"
+                                    className="size-12 min-h-[44px] min-w-[44px] rounded bg-white/5 flex items-center justify-center text-primary border border-white/10 transition-[border-color] duration-300 hover:border-sky-500/40"
                                 >
                                     {contact.icon}
                                 </motion.div>
@@ -71,7 +71,7 @@ const Contact = () => (
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             <div className="space-y-2">
                                 <label className="text-xs font-bold uppercase tracking-widest text-slate-500">First Name</label>
-                                <input className="w-full rounded border-slate-200 bg-slate-50 p-3 focus:border-primary focus:ring-primary outline-none transition-colors"  type="text" />
+                                <input className="w-full rounded border-slate-200 bg-slate-50 p-3 focus:border-primary focus:ring-primary outline-none transition-colors" type="text" />
                             </div>
                             <div className="space-y-2">
                                 <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Last Name</label>
@@ -80,7 +80,7 @@ const Contact = () => (
                         </div>
                         <div className="space-y-2">
                             <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Company Email</label>
-                            <input className="w-full rounded border-slate-200 bg-slate-50 p-3 focus:border-primary focus:ring-primary outline-none transition-colors"  type="email" />
+                            <input className="w-full rounded border-slate-200 bg-slate-50 p-3 focus:border-primary focus:ring-primary outline-none transition-colors" type="email" />
                         </div>
                         <div className="space-y-2">
                             <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Project Type</label>

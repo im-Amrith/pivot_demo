@@ -23,7 +23,7 @@ const Navbar = () => {
                     <a className="rounded bg-primary px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all" href="#contact">Get Started</a>
                 </div>
 
-                <button className="md:hidden text-white" onClick={() => setIsOpen(!isOpen)}>
+                <button className="md:hidden text-white min-h-[44px] min-w-[44px] flex items-center justify-center" onClick={() => setIsOpen(!isOpen)}>
                     {isOpen ? <X /> : <Menu />}
                 </button>
             </nav>
@@ -35,10 +35,10 @@ const Navbar = () => {
                     animate={{ opacity: 1, y: 0 }}
                     className="md:hidden bg-white border-b border-slate-100 p-6 flex flex-col gap-4"
                 >
-                    <a className="text-sm font-medium text-slate-700 hover:text-primary" href="#approach" onClick={() => setIsOpen(false)}>Approach</a>
-                    <a className="text-sm font-medium text-slate-700 hover:text-primary" href="#services" onClick={() => setIsOpen(false)}>Services</a>
-                    <a className="text-sm font-medium text-slate-700 hover:text-primary" href="#success" onClick={() => setIsOpen(false)}>Success Stories</a>
-                    <a className="rounded bg-primary px-5 py-2.5 text-sm font-bold text-white text-center" href="#contact" onClick={() => setIsOpen(false)}>Get Started</a>
+                    <a className="text-sm font-medium text-slate-700 hover:text-primary min-h-[44px] flex items-center" href="#approach" onClick={() => setIsOpen(false)}>Approach</a>
+                    <a className="text-sm font-medium text-slate-700 hover:text-primary min-h-[44px] flex items-center" href="#services" onClick={() => setIsOpen(false)}>Services</a>
+                    <a className="text-sm font-medium text-slate-700 hover:text-primary min-h-[44px] flex items-center" href="#success" onClick={() => setIsOpen(false)}>Success Stories</a>
+                    <a className="rounded bg-primary px-5 py-2.5 text-sm font-bold text-white text-center min-h-[44px] flex items-center justify-center" href="#contact" onClick={() => setIsOpen(false)}>Get Started</a>
                 </motion.div>
             )}
         </header>

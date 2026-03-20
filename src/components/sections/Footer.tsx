@@ -35,7 +35,7 @@ const Footer = () => (
                                 key={i}
                                 whileHover={{ y: -3, scale: 1.1 }}
                                 transition={SPRING.snappy}
-                                className="size-10 rounded bg-white/5 flex items-center justify-center hover:bg-primary transition-colors border border-white/10 hover:border-primary/50"
+                                className="size-11 rounded bg-white/5 flex items-center justify-center hover:bg-primary transition-colors border border-white/10 hover:border-primary/50"
                                 href="#"
                             >
                                 <Icon size={18} />
@@ -57,16 +57,7 @@ const Footer = () => (
                         ))}
                     </ul>
                 </motion.div>
-                <motion.div variants={fadeSlideUp}>
-                    <h4 className="font-bold text-lg mb-6">Newsletter</h4>
-                    <p className="text-slate-400 text-sm mb-4">Get bi-weekly insights on AI and automation trends.</p>
-                    <div className="flex">
-                        <input className="w-full rounded-l bg-white/5 border border-white/10 text-white px-4 py-2 focus:ring-primary focus:border-primary outline-none transition-colors" placeholder="Email" type="email" />
-                        <MagneticButton className="bg-primary rounded-r px-4 font-bold hover:bg-primary/90 transition-all">
-                            Join
-                        </MagneticButton>
-                    </div>
-                </motion.div>
+
                 <motion.div variants={fadeSlideUp}>
                     <h4 className="font-bold text-lg mb-6">Contact</h4>
                     <ul className="space-y-4 text-slate-400 text-sm">
@@ -83,7 +74,7 @@ const Footer = () => (
                 transition={{ ...SPRING.gentle, delay: 0.3 }}
                 className="border-t border-white/5 pt-10 flex flex-col md:flex-row justify-between items-center gap-6"
             >
-                <p className="text-slate-500 text-xs">© 2024 Pivot Automations Pvt Ltd. All rights reserved.</p>
+                <p className="text-slate-500 text-xs">© 2024 Pivot Pvt Ltd. All rights reserved.</p>
                 <div className="flex gap-8 text-slate-500 text-xs">
                     {['Privacy Policy', 'Terms of Service', 'Cookie Policy'].map((text, i) => (
                         <motion.a

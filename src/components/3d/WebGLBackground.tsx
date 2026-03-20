@@ -1,9 +1,21 @@
-import { useRef, useMemo, useCallback } from 'react';
+import { useRef, useMemo, useCallback, useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 
+/* ─── Mobile detection ─── */
+const useIsMobile = (bp = 768) => {
+    const [m, setM] = useState(typeof window !== 'undefined' ? window.innerWidth < bp : false);
+    useEffect(() => {
+        const c = () => setM(window.innerWidth < bp);
+        window.addEventListener('resize', c, { passive: true });
+        return () => window.removeEventListener('resize', c);
+    }, [bp]);
+    return m;
+};
+
 /* ─── Configuration ─── */
-const GRID = 100;          // 100×100 = 10,000 particles
+const GRID_DESKTOP = 100;   // 100×100 = 10,000 particles
+const GRID_MOBILE = 50;     // 50×50 = 2,500 particles (75% reduction)
 const SPACING = 0.18;      // distance between particles
 const WAVE_SPEED = 0.35;   // ripple speed
 const WAVE_AMP = 0.25;     // ripple amplitude
@@ -12,7 +24,7 @@ const MOUSE_STRENGTH = 0.8;// repulsion height boost
 const LERP_SPEED = 0.04;   // smooth interpolation speed
 
 /* ─── Particle Field Inner Component ─── */
-const ParticleField = () => {
+const ParticleFieldInner = ({ grid }: { grid: number }) => {
     const pointsRef = useRef<THREE.Points>(null!);
     const { size, viewport } = useThree();
 
@@ -21,14 +33,14 @@ const ParticleField = () => {
 
     // Generate initial positions centered on origin
     const { positions, basePositions, count } = useMemo(() => {
-        const cnt = GRID * GRID;
+        const cnt = grid * grid;
         const pos = new Float32Array(cnt * 3);
         const base = new Float32Array(cnt * 3);
-        const halfExtent = (GRID * SPACING) / 2;
+        const halfExtent = (grid * SPACING) / 2;
 
-        for (let ix = 0; ix < GRID; ix++) {
-            for (let iy = 0; iy < GRID; iy++) {
-                const idx = (ix * GRID + iy) * 3;
+        for (let ix = 0; ix < grid; ix++) {
+            for (let iy = 0; iy < grid; iy++) {
+                const idx = (ix * grid + iy) * 3;
                 const x = ix * SPACING - halfExtent;
                 const y = iy * SPACING - halfExtent;
                 pos[idx] = x;
@@ -40,7 +52,7 @@ const ParticleField = () => {
             }
         }
         return { positions: pos, basePositions: base, count: cnt };
-    }, []);
+    }, [grid]);
 
     // Color array for per-particle tinting
     const colors = useMemo(() => {
@@ -52,7 +64,7 @@ const ParticleField = () => {
             c[i * 3 + 2] = baseColor.b;
         }
         return c;
-    }, [count]);
+    }, [count, grid]);
 
     // Track mouse in world coords
     const handlePointerMove = useCallback(
@@ -183,23 +195,28 @@ const FogSpheres = () => {
 };
 
 /* ─── Exported Wrapper ─── */
-const WebGLBackground = () => (
-    <div className="absolute inset-0 -z-10 bg-[#050B14]">
-        <Canvas
-            dpr={[1, 1.5]}
-            camera={{ position: [0, 3, 7], fov: 55 }}
-            gl={{ alpha: false, antialias: false, powerPreference: 'high-performance' }}
-            style={{ position: 'absolute', inset: 0 }}
-            eventSource={typeof document !== 'undefined' ? document.documentElement : undefined}
-        >
-            <color attach="background" args={['#050B14']} />
-            <fog attach="fog" args={['#050B14', 8, 20]} />
-            <ParticleField />
-            <FogSpheres />
-        </Canvas>
-        {/* Film grain overlay */}
-        <div className="absolute inset-0 bg-grain mix-blend-overlay pointer-events-none" />
-    </div>
-);
+const WebGLBackground = () => {
+    const isMobile = useIsMobile();
+    const grid = isMobile ? GRID_MOBILE : GRID_DESKTOP;
+
+    return (
+        <div className="absolute inset-0 -z-10 bg-[#050B14]">
+            <Canvas
+                dpr={isMobile ? [1, 1] : [1, 1.5]}
+                camera={{ position: [0, 3, 7], fov: 55 }}
+                gl={{ alpha: false, antialias: false, powerPreference: isMobile ? 'low-power' : 'high-performance' }}
+                style={{ position: 'absolute', inset: 0 }}
+                eventSource={!isMobile && typeof document !== 'undefined' ? document.documentElement : undefined}
+            >
+                <color attach="background" args={['#050B14']} />
+                <fog attach="fog" args={['#050B14', 8, 20]} />
+                <ParticleFieldInner grid={grid} />
+                {!isMobile && <FogSpheres />}
+            </Canvas>
+            {/* Film grain overlay */}
+            <div className="absolute inset-0 bg-grain mix-blend-overlay pointer-events-none" />
+        </div>
+    );
+};
 
 export default WebGLBackground;

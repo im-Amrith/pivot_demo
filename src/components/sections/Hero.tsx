@@ -35,7 +35,7 @@ const Hero = () => {
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        className="w-full flex-shrink-0 relative z-10 pr-0 lg:pr-4 flex flex-col gap-8 overflow-hidden"
+                        className="w-full flex-shrink-0 relative z-10 pr-0 lg:pr-4 flex flex-col gap-6 md:gap-8 overflow-hidden px-1 sm:px-0"
                     >
                         <div className="inline-flex w-fit items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary">
                             <span className="relative flex h-2 w-2">
@@ -47,13 +47,13 @@ const Hero = () => {
                         <div className="min-h-[160px] sm:min-h-0 w-full">
                             <ShimmerText text="Transformation not just Automation" />
                         </div>
-                        <p className="mt-6 max-w-2xl text-base md:text-lg font-medium text-white/85 leading-relaxed drop-shadow-md [text-shadow:_0_1px_10px_rgb(0_0_0_/_40%)]">
+                        <p className="mt-4 md:mt-6 max-w-2xl text-sm sm:text-base md:text-lg font-medium text-white/85 leading-relaxed drop-shadow-md [text-shadow:_0_1px_10px_rgb(0_0_0_/_40%)] break-words hyphens-auto">
                             Unlock your business potential with high-performance intelligent process automation tailored for SMEs. We evolve your workflows from manual to autonomous.
                         </p>
                         <div className="w-full flex justify-center lg:justify-start mt-8">
                             <MagneticButton
                                 onClick={handleEvolutionClick}
-                                className="flex items-center justify-center gap-2 rounded border-2 border-primary/50 bg-primary px-8 py-4 font-bold text-white shadow-xl shadow-primary/25 hover:shadow-primary/40 transition-all w-[90%] sm:w-auto mx-auto lg:mx-0 overflow-hidden relative"
+                                className="flex items-center justify-center gap-2 rounded border-2 border-primary/50 bg-primary px-8 py-4 font-bold text-white shadow-xl shadow-primary/25 hover:shadow-primary/40 transition-all w-[90%] sm:w-auto mx-auto lg:mx-0 overflow-hidden relative min-h-[48px]"
                             >
                                 {isLoading ? (
                                     <div className="flex items-center gap-2">

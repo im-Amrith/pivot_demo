@@ -13,7 +13,7 @@ const Stats = () => (
                     className="lg:w-1/3"
                 >
                     <RevealText>
-                        <h2 className="text-3xl font-black lg:text-4xl">Efficiency Gains Delivered</h2>
+                        <h2 className="text-3xl font-black lg:text-4xl break-words">Efficiency Gains Delivered</h2>
                     </RevealText>
                     <p className="mt-4 text-slate-400">Our intelligent automation layer provides measurable ROI within the first 90 days of implementation.</p>
                 </motion.div>
@@ -39,7 +39,7 @@ const Stats = () => (
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
                                 transition={{ ...SPRING.snappy, delay: i * 0.1 + 0.2 }}
-                                className="mt-2 text-5xl font-black"
+                                className="mt-2 text-4xl font-black md:text-5xl"
                             >
                                 {stat.value}
                             </motion.p>

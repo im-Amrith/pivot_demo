@@ -1,17 +1,19 @@
 import React, { useRef } from 'react';
 import { motion, useMotionValue, useSpring } from 'motion/react';
+import { useIsMobile } from './MotionKit';
 
 const MagneticButton = ({ children, className, onClick }: { children: React.ReactNode, className?: string, onClick?: () => void }) => {
     const ref = useRef<HTMLButtonElement>(null);
     const x = useMotionValue(0);
     const y = useMotionValue(0);
+    const isMobile = useIsMobile();
 
     const springConfig = { damping: 15, stiffness: 150 };
     const springX = useSpring(x, springConfig);
     const springY = useSpring(y, springConfig);
 
     const handleMouseMove = (e: React.MouseEvent) => {
-        if (!ref.current) return;
+        if (!ref.current || isMobile) return;
         const { clientX, clientY } = e;
         const { left, top, width, height } = ref.current.getBoundingClientRect();
         const centerX = left + width / 2;
@@ -28,6 +30,19 @@ const MagneticButton = ({ children, className, onClick }: { children: React.Reac
         y.set(0);
     };
 
+    // On mobile, render a plain button without magnetic displacement
+    if (isMobile) {
+        return (
+            <button
+                ref={ref}
+                onClick={onClick}
+                className={`min-h-[48px] ${className || ''}`}
+            >
+                {children}
+            </button>
+        );
+    }
+
     return (
         <motion.button
             ref={ref}
@@ -35,7 +50,7 @@ const MagneticButton = ({ children, className, onClick }: { children: React.Reac
             onMouseLeave={handleMouseLeave}
             onClick={onClick}
             style={{ x: springX, y: springY }}
-            className={className}
+            className={`min-h-[48px] ${className || ''}`}
         >
             {children}
         </motion.button>
