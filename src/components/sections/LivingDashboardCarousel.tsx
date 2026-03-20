@@ -241,22 +241,22 @@ const LivingDashboardCarousel = () => {
             </div>
 
             <div className="relative mx-auto h-145 w-full max-w-7xl px-4 md:px-6">
-                <div className="pointer-events-none absolute inset-y-0 left-0 right-0 z-20 flex items-center justify-between px-1 md:px-3">
+                <div className="pointer-events-none absolute inset-y-0 left-0 right-0 z-30 flex items-center justify-between px-1 md:px-3">
                     <button
                         type="button"
                         onClick={handlePrev}
-                        className="pointer-events-auto inline-flex size-11 items-center justify-center rounded-full border border-white/15 bg-slate-900/80 text-slate-100 backdrop-blur-md transition-colors hover:bg-slate-800"
+                        className="pointer-events-auto inline-flex size-12 items-center justify-center rounded-full border border-sky-400/40 bg-slate-800/90 text-white shadow-lg shadow-sky-500/15 backdrop-blur-md transition-all hover:scale-110 hover:bg-slate-700 hover:border-sky-400/60 hover:shadow-sky-500/25 min-h-[44px] min-w-[44px]"
                         aria-label="Previous service"
                     >
-                        <ChevronLeft size={22} />
+                        <ChevronLeft size={24} strokeWidth={2.5} />
                     </button>
                     <button
                         type="button"
                         onClick={handleNext}
-                        className="pointer-events-auto inline-flex size-11 items-center justify-center rounded-full border border-white/15 bg-slate-900/80 text-slate-100 backdrop-blur-md transition-colors hover:bg-slate-800"
+                        className="pointer-events-auto inline-flex size-12 items-center justify-center rounded-full border border-sky-400/40 bg-slate-800/90 text-white shadow-lg shadow-sky-500/15 backdrop-blur-md transition-all hover:scale-110 hover:bg-slate-700 hover:border-sky-400/60 hover:shadow-sky-500/25 min-h-[44px] min-w-[44px]"
                         aria-label="Next service"
                     >
-                        <ChevronRight size={22} />
+                        <ChevronRight size={24} strokeWidth={2.5} />
                     </button>
                 </div>
 
