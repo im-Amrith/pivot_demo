@@ -245,18 +245,18 @@ const LivingDashboardCarousel = () => {
                     <button
                         type="button"
                         onClick={handlePrev}
-                        className="pointer-events-auto inline-flex size-12 items-center justify-center rounded-full border border-sky-400/40 bg-slate-800/90 text-white shadow-lg shadow-sky-500/15 backdrop-blur-md transition-all hover:scale-110 hover:bg-slate-700 hover:border-sky-400/60 hover:shadow-sky-500/25 min-h-[44px] min-w-[44px]"
+                        className="pointer-events-auto inline-flex items-center justify-center text-white/70 transition-all hover:text-white hover:scale-110 min-h-[44px] min-w-[44px]"
                         aria-label="Previous service"
                     >
-                        <ChevronLeft size={24} strokeWidth={2.5} />
+                        <ChevronLeft size={28} strokeWidth={2.5} />
                     </button>
                     <button
                         type="button"
                         onClick={handleNext}
-                        className="pointer-events-auto inline-flex size-12 items-center justify-center rounded-full border border-sky-400/40 bg-slate-800/90 text-white shadow-lg shadow-sky-500/15 backdrop-blur-md transition-all hover:scale-110 hover:bg-slate-700 hover:border-sky-400/60 hover:shadow-sky-500/25 min-h-[44px] min-w-[44px]"
+                        className="pointer-events-auto inline-flex items-center justify-center text-white/70 transition-all hover:text-white hover:scale-110 min-h-[44px] min-w-[44px]"
                         aria-label="Next service"
                     >
-                        <ChevronRight size={24} strokeWidth={2.5} />
+                        <ChevronRight size={28} strokeWidth={2.5} />
                     </button>
                 </div>
 
