@@ -46,7 +46,7 @@ const ScrollytellingAbout = () => {
     const activeContent = aboutTabs.find((tab) => tab.id === activeTab) ?? aboutTabs[0];
 
     return (
-        <section id="about" className="relative bg-[#0f172a] py-20 md:py-24">
+        <section id="about" className="relative bg-[#0f172a] py-12 md:py-24">
             <div className="pointer-events-none absolute inset-0">
                 <div className="absolute left-1/2 top-0 h-64 w-64 -translate-x-1/2 rounded-full bg-sky-500/10 blur-3xl" />
                 <div className="absolute bottom-0 right-0 h-72 w-72 rounded-full bg-blue-700/10 blur-3xl" />

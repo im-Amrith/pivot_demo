@@ -92,7 +92,7 @@ const Approach = () => {
     const ActiveIcon = active.icon;
 
     return (
-        <section className="relative py-24 bg-slate-900 overflow-hidden" id="approach">
+        <section className="relative py-14 md:py-24 bg-slate-900 overflow-hidden" id="approach">
             {/* Ambient hue-shifting background */}
             <motion.div
                 animate={{
