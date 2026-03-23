@@ -3,25 +3,25 @@ import { RevealText, SPRING, VIEWPORT, staggerContainer } from '../ui/MotionKit'
 
 const caseStudies = [
     {
-        slug: 'vantage',
-        title: 'Vantage',
-        agent: 'AI Interviewer Agent',
+        slug: 'encon',
+        title: 'Encon: Legacy Data Digitization',
+        agent: 'IDP Agent',
         summary:
-            'Delivered autonomous tech recruitment at scale with standardized interview scoring, reducing screening bias while accelerating candidate throughput.',
+            'Deployed an autonomous IDP agent for Encon to ingest over three decades of legacy offer letters (1990–present). Overcoming challenges like deteriorating scan quality and constantly shifting document layouts, the system seamlessly extracted 83 highly variable data fields—including customer names, contact numbers, and specific sales personnel. By digitizing and structuring 2,300+ complex files in a single month with zero manual data entry, we unlocked decades of historical data for instant searchability and analytics.',
     },
     {
-        slug: 'velocitas',
-        title: 'Velocitas',
-        agent: 'Custom BPA Agent',
+        slug: 'invoice-extraction',
+        title: 'Autonomous Invoice Extraction',
+        agent: 'Financial Automation AI',
         summary:
-            'Implemented a dual-mode AI workflow engine for engineering cycles that orchestrates repeatable automations while preserving human override for edge cases.',
+            'Integrated an AI-driven financial pipeline that automatically captures line-item details, vendor IDs, and complex tax codes from unstructured, multi-page PDF invoices. Unlike legacy OCR, this agent requires no template training and adapts instantly to varying vendor formats. It autonomously cross-references extracted data with the client\'s existing ERP for instant reconciliation, identifying discrepancies and entirely eliminating manual month-end bottlenecks while reducing human error to zero.',
     },
     {
-        slug: 'teamsync',
-        title: 'TeamSync',
-        agent: 'Minutes of Meeting AI',
+        slug: 'autonomous-outreach',
+        title: 'Hyper-Personalized Sales Workflows',
+        agent: 'Autonomous Outreach Agent',
         summary:
-            'Extended cross-department syncs with intelligent MoM capture that structures decisions, extracts actions, and routes follow-ups into operational workflows.',
+            'Deployed a customized outbound agent to orchestrate multi-channel messaging at scale. The AI analyzes prospect backgrounds, recent company news, and firmographics to dynamically draft context-aware, hyper-personalized outreach sequences. It autonomously handles multi-step follow-ups based on prospect sentiment and intent, filling the sales pipeline and scheduling meetings directly on the calendar while human reps focus exclusively on closing warm leads.',
     },
 ];
 
