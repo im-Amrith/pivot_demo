@@ -29,6 +29,16 @@ const logos = [
             </svg>
         ),
     },
+    {
+        name: 'Encon',
+        mark: (
+            <div className="flex items-center gap-3">
+                <img src={new URL('../ui/encon.png', import.meta.url).href} alt="Encon" className="h-9 w-auto" />
+                <span className="text-[24px] font-semibold" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>Encon</span>
+            </div>
+            
+        ),
+    },
 ];
 
 const TrustedBy = () => {

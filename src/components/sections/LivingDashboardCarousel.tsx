@@ -241,22 +241,22 @@ const LivingDashboardCarousel = () => {
             </div>
 
             <div className="relative mx-auto h-145 w-full max-w-7xl px-4 md:px-6">
-                <div className="pointer-events-none absolute inset-y-0 left-0 right-0 z-30 flex items-center justify-between px-1 md:px-3">
+                <div className="pointer-events-none absolute inset-y-0 left-0 right-0 z-20 flex items-center justify-between px-1 md:px-3">
                     <button
                         type="button"
                         onClick={handlePrev}
-                        className="pointer-events-auto inline-flex items-center justify-center text-white/70 transition-all hover:text-white hover:scale-110 min-h-[44px] min-w-[44px]"
+                        className="pointer-events-auto inline-flex size-11 items-center justify-center rounded-full border border-white/15 bg-slate-900/80 text-slate-100 backdrop-blur-md transition-colors hover:bg-slate-800"
                         aria-label="Previous service"
                     >
-                        <ChevronLeft size={28} strokeWidth={2.5} />
+                        <ChevronLeft size={22} />
                     </button>
                     <button
                         type="button"
                         onClick={handleNext}
-                        className="pointer-events-auto inline-flex items-center justify-center text-white/70 transition-all hover:text-white hover:scale-110 min-h-[44px] min-w-[44px]"
+                        className="pointer-events-auto inline-flex size-11 items-center justify-center rounded-full border border-white/15 bg-slate-900/80 text-slate-100 backdrop-blur-md transition-colors hover:bg-slate-800"
                         aria-label="Next service"
                     >
-                        <ChevronRight size={28} strokeWidth={2.5} />
+                        <ChevronRight size={22} />
                     </button>
                 </div>
 
