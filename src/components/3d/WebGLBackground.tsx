@@ -210,7 +210,7 @@ const WebGLBackground = () => {
             >
                 <color attach="background" args={['#050B14']} />
                 <fog attach="fog" args={['#050B14', 8, 20]} />
-                <ParticleFieldInner grid={grid} />
+                <ParticleFieldInner key={grid} grid={grid} />
                 {!isMobile && <FogSpheres />}
             </Canvas>
             {/* Film grain overlay */}

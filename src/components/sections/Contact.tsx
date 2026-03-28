@@ -21,7 +21,7 @@ const Contact = () => {
     };
 
     return (
-        <section className="py-24 overflow-hidden" id="contact">
+        <section className="pt-12 pb-24 overflow-hidden" id="contact">
         <div className="mx-auto max-w-7xl px-6">
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -54,7 +54,7 @@ const Contact = () => {
                     >
                         {[
                             { icon: <MapPin size={24} />, label: 'Office', value: 'Mumbai, Maharashtra, India 400011' },
-                            { icon: <Phone size={24} />, label: 'Call Us', value: '+91 976972372' },
+                            { icon: <Phone size={24} />, label: 'Call Us', value: '+91 9769723272' },
                             { icon: <Mail size={24} />, label: 'Email Us', value: 'contactus@pivotautomations.com' },
                         ].map((contact, i) => (
                             <motion.div

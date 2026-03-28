@@ -12,7 +12,10 @@ const Hero = () => {
 
     const handleEvolutionClick = () => {
         setIsLoading(true);
-        setTimeout(() => setIsLoading(false), 3000);
+        setTimeout(() => {
+            setIsLoading(false);
+            document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+        }, 1000);
     };
 
     return (

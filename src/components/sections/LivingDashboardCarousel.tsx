@@ -47,10 +47,10 @@ const services: ServiceCard[] = [
     {
         id: 'financial-automation',
         name: 'Financial Automation',
-        agent: 'Reconciliation Intelligence Agent',
+        agent: 'Revenue Intelligence Dashboard',
         description:
-            'Continuously reconciles transactions and highlights anomalies through live ledger-matching signals and dynamic variance checks.',
-        tags: ['Ledger Matching', 'Real-time Signals', 'Anomaly Detection'],
+            'Combines sales pipeline data with financial transactions to deliver real-time visibility into revenue performance, collections, and deal progress. Identifies bottlenecks, predicts cash flow, and flags risks to help teams close faster and optimize revenue outcomes.',
+        tags: ['Revenue Tracking', 'Sales Pipeline', 'Cash Flow Insights','Anomaly Detection'],
     },
 ];
 

@@ -11,10 +11,10 @@ const caseStudies = [
     },
     {
         slug: 'invoice-extraction',
-        title: 'Revenue Intelligence Dashboard',
+        title: 'Autonomous Invoice Extraction',
         agent: 'Financial Automation AI',
         summary:
-            'Combines sales pipeline data with financial transactions to deliver real-time visibility into revenue performance, collections, and deal progress. Identifies bottlenecks, predicts cash flow, and flags risks to help teams close faster and optimize revenue outcomes.',
+        'Integrated an AI-driven financial pipeline that automatically captures line-item details, vendor IDs, and complex tax codes from unstructured, multi-page PDF invoices. Unlike legacy OCR, this agent requires no template training and adapts instantly to varying vendor formats. It autonomously cross-references extracted data with the client\'s existing ERP for instant reconciliation, identifying discrepancies and entirely eliminating manual month-end bottlenecks while reducing human error to zero.'
     },
     {
         slug: 'autonomous-outreach',
