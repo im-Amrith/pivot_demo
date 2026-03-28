@@ -11,17 +11,17 @@ const caseStudies = [
     },
     {
         slug: 'invoice-extraction',
-        title: 'Autonomous Invoice Extraction',
+        title: 'Revenue Intelligence Dashboard',
         agent: 'Financial Automation AI',
         summary:
-            'Integrated an AI-driven financial pipeline that automatically captures line-item details, vendor IDs, and complex tax codes from unstructured, multi-page PDF invoices. Unlike legacy OCR, this agent requires no template training and adapts instantly to varying vendor formats. It autonomously cross-references extracted data with the client\'s existing ERP for instant reconciliation, identifying discrepancies and entirely eliminating manual month-end bottlenecks while reducing human error to zero.',
+            'Combines sales pipeline data with financial transactions to deliver real-time visibility into revenue performance, collections, and deal progress. Identifies bottlenecks, predicts cash flow, and flags risks to help teams close faster and optimize revenue outcomes.',
     },
     {
         slug: 'autonomous-outreach',
         title: 'Hyper-Personalized Sales Workflows',
         agent: 'Autonomous Outreach Agent',
         summary:
-            'Deployed a customized outbound agent to orchestrate multi-channel messaging at scale. The AI analyzes prospect backgrounds, recent company news, and firmographics to dynamically draft context-aware, hyper-personalized outreach sequences. It autonomously handles multi-step follow-ups based on prospect sentiment and intent, filling the sales pipeline and scheduling meetings directly on the calendar while human reps focus exclusively on closing warm leads.',
+            'A hyper-personalized sales outreach workflow that automatically extracts key insights from a prospect’s website such as their services, target audience, and positioning and uses AI to identify relevant pain points and use cases. The system then generates tailored email messages referencing specific aspects of the prospect’s business, ensuring high relevance and engagement. Additional automation includes lead enrichment, CRM updates, follow-up sequencing, and performance tracking, significantly reducing manual effort while improving response and conversion rates.'
     },
 ];
 

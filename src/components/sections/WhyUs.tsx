@@ -88,7 +88,10 @@ const WhyUs = () => {
                             >
                                 Most automation attempts fail because they lack a strategic foundation. We provide the architecture, the technology, and the ongoing support to ensure your digital transformation sticks.
                             </motion.p>
-                            <MagneticButton className="bg-primary hover:bg-primary/90 text-white font-bold py-4 px-10 rounded-lg shadow-xl shadow-primary/20 transition-all flex items-center gap-2">
+                            <MagneticButton 
+                                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                                className="bg-primary hover:bg-primary/90 text-white font-bold py-4 px-10 rounded-lg shadow-xl shadow-primary/20 transition-all flex items-center gap-2"
+                            >
                                 Get Your Free Audit
                                 <Verified size={20} />
                             </MagneticButton>

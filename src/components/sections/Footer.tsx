@@ -2,8 +2,7 @@ import { motion } from 'motion/react';
 import {
     LayoutDashboard,
     Share2,
-    Globe,
-    MessageSquare,
+    Linkedin,
     Phone,
     Mail,
     MapPin
@@ -30,17 +29,24 @@ const Footer = () => (
                     </div>
                     <p className="text-slate-400 text-sm leading-relaxed mb-6">Empowering SMEs with enterprise-grade automation architecture. Transformation is just a pivot away.</p>
                     <div className="flex gap-4">
-                        {[Share2, Globe, MessageSquare].map((Icon, i) => (
-                            <motion.a
-                                key={i}
-                                whileHover={{ y: -3, scale: 1.1 }}
-                                transition={SPRING.snappy}
-                                className="size-11 rounded bg-white/5 flex items-center justify-center hover:bg-primary transition-colors border border-white/10 hover:border-primary/50"
-                                href="#"
-                            >
-                                <Icon size={18} />
-                            </motion.a>
-                        ))}
+                        <motion.button
+                            onClick={() => { navigator.clipboard.writeText(window.location.origin) }}
+                            whileHover={{ y: -3, scale: 1.1 }}
+                            transition={SPRING.snappy}
+                            className="size-11 rounded bg-white/5 flex items-center justify-center hover:bg-primary transition-colors border border-white/10 hover:border-primary/50"
+                        >
+                            <Share2 size={18} />
+                        </motion.button>
+                        <motion.a
+                            href="https://www.linkedin.com/company/pivotautomations/posts/?feedView=all"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            whileHover={{ y: -3, scale: 1.1 }}
+                            transition={SPRING.snappy}
+                            className="size-11 rounded bg-white/5 flex items-center justify-center hover:bg-primary transition-colors border border-white/10 hover:border-primary/50"
+                        >
+                            <Linkedin size={18} />
+                        </motion.a>
                     </div>
                 </motion.div>
                 <motion.div variants={fadeSlideUp}>
@@ -61,9 +67,9 @@ const Footer = () => (
                 <motion.div variants={fadeSlideUp}>
                     <h4 className="font-bold text-lg mb-6">Contact</h4>
                     <ul className="space-y-4 text-slate-400 text-sm">
-                        <li className="flex gap-3"><Phone size={16} className="text-primary shrink-0" /> +91 22 4500 8900</li>
-                        <li className="flex gap-3"><Mail size={16} className="text-primary shrink-0" /> evolve@pivot.ai</li>
-                        <li className="flex gap-3"><MapPin size={16} className="text-primary shrink-0" /> BKC, Mumbai, IN</li>
+                        <li className="flex gap-3"><Phone size={16} className="text-primary shrink-0" /> +91 976972372</li>
+                        <li className="flex gap-3"><Mail size={16} className="text-primary shrink-0" /> contactus@pivotautomations.com</li>
+                        <li className="flex gap-3"><MapPin size={16} className="text-primary shrink-0" /> Mumbai, Maharashtra, India 400011</li>
                     </ul>
                 </motion.div>
             </motion.div>
@@ -74,7 +80,7 @@ const Footer = () => (
                 transition={{ ...SPRING.gentle, delay: 0.3 }}
                 className="border-t border-white/5 pt-10 flex flex-col md:flex-row justify-between items-center gap-6"
             >
-                <p className="text-slate-500 text-xs">© 2024 Pivot Pvt Ltd. All rights reserved.</p>
+                <p className="text-slate-500 text-xs">© 2025 Pivot. All rights reserved.</p>
                 <div className="flex gap-8 text-slate-500 text-xs">
                     {['Privacy Policy', 'Terms of Service', 'Cookie Policy'].map((text, i) => (
                         <motion.a

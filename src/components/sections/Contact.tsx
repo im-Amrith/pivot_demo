@@ -1,10 +1,27 @@
+import { useState } from 'react';
 import { motion } from 'motion/react';
 import { MapPin, Phone, Mail } from 'lucide-react';
 import { RevealText, SPRING, VIEWPORT, staggerContainer, fadeSlideUp } from '../ui/MotionKit';
 import MagneticButton from '../ui/MagneticButton';
 
-const Contact = () => (
-    <section className="py-24 overflow-hidden" id="contact">
+const Contact = () => {
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        projectType: 'Custom BPA',
+        message: ''
+    });
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        const subject = encodeURIComponent(`New Inquiry: ${formData.projectType} from ${formData.firstName} ${formData.lastName}`);
+        const body = encodeURIComponent(`Name: ${formData.firstName} ${formData.lastName}\nEmail: ${formData.email}\nProject Type: ${formData.projectType}\n\nMessage:\n${formData.message}`);
+        window.location.href = `mailto:contactus@pivotautomations.com?subject=${subject}&body=${body}`;
+    };
+
+    return (
+        <section className="py-24 overflow-hidden" id="contact">
         <div className="mx-auto max-w-7xl px-6">
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -36,9 +53,9 @@ const Contact = () => (
                         className="mt-12 space-y-8"
                     >
                         {[
-                            { icon: <MapPin size={24} />, label: 'Office', value: 'Maker Maxity, BKC, Mumbai 400051' },
-                            { icon: <Phone size={24} />, label: 'Call Us', value: '+91 22 4500 8900' },
-                            { icon: <Mail size={24} />, label: 'Email Us', value: 'evolve@pivotautomations.com' },
+                            { icon: <MapPin size={24} />, label: 'Office', value: 'Mumbai, Maharashtra, India 400011' },
+                            { icon: <Phone size={24} />, label: 'Call Us', value: '+91 976972372' },
+                            { icon: <Mail size={24} />, label: 'Email Us', value: 'contactus@pivotautomations.com' },
                         ].map((contact, i) => (
                             <motion.div
                                 key={i}
@@ -67,32 +84,61 @@ const Contact = () => (
                     transition={SPRING.gentle}
                     className="bg-white p-8 lg:p-12 lg:w-1/2"
                 >
-                    <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+                    <form className="space-y-6" onSubmit={handleSubmit}>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             <div className="space-y-2">
                                 <label className="text-xs font-bold uppercase tracking-widest text-slate-500">First Name</label>
-                                <input className="w-full rounded border-slate-200 bg-slate-50 p-3 focus:border-primary focus:ring-primary outline-none transition-colors" type="text" />
+                                <input 
+                                    className="w-full rounded border-slate-200 bg-slate-50 p-3 focus:border-primary focus:ring-primary outline-none transition-colors" 
+                                    type="text" 
+                                    required
+                                    value={formData.firstName}
+                                    onChange={(e) => setFormData({...formData, firstName: e.target.value})}
+                                />
                             </div>
                             <div className="space-y-2">
                                 <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Last Name</label>
-                                <input className="w-full rounded border-slate-200 bg-slate-50 p-3 focus:border-primary focus:ring-primary outline-none transition-colors" type="text" />
+                                <input 
+                                    className="w-full rounded border-slate-200 bg-slate-50 p-3 focus:border-primary focus:ring-primary outline-none transition-colors" 
+                                    type="text" 
+                                    required
+                                    value={formData.lastName}
+                                    onChange={(e) => setFormData({...formData, lastName: e.target.value})}
+                                />
                             </div>
                         </div>
                         <div className="space-y-2">
                             <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Company Email</label>
-                            <input className="w-full rounded border-slate-200 bg-slate-50 p-3 focus:border-primary focus:ring-primary outline-none transition-colors" type="email" />
+                            <input 
+                                className="w-full rounded border-slate-200 bg-slate-50 p-3 focus:border-primary focus:ring-primary outline-none transition-colors" 
+                                type="email" 
+                                required
+                                value={formData.email}
+                                onChange={(e) => setFormData({...formData, email: e.target.value})}
+                            />
                         </div>
                         <div className="space-y-2">
                             <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Project Type</label>
-                            <select className="w-full rounded border-slate-200 bg-slate-50 p-3 focus:border-primary focus:ring-primary outline-none transition-colors">
-                                <option>Custom BPA</option>
-                                <option>AI Consulting</option>
-                                <option>Financial Automation</option>
+                            <select 
+                                className="w-full rounded border-slate-200 bg-slate-50 p-3 focus:border-primary focus:ring-primary outline-none transition-colors"
+                                value={formData.projectType}
+                                onChange={(e) => setFormData({...formData, projectType: e.target.value})}
+                            >
+                                <option value="Custom BPA">Custom BPA</option>
+                                <option value="AI Consulting">AI Consulting</option>
+                                <option value="Financial Automation">Financial Automation</option>
                             </select>
                         </div>
                         <div className="space-y-2">
                             <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Message</label>
-                            <textarea className="w-full rounded border-slate-200 bg-slate-50 p-3 focus:border-primary focus:ring-primary outline-none transition-colors" placeholder="Tell us about your manual bottlenecks..." rows={4}></textarea>
+                            <textarea 
+                                className="w-full rounded border-slate-200 bg-slate-50 p-3 focus:border-primary focus:ring-primary outline-none transition-colors" 
+                                placeholder="Tell us about your manual bottlenecks..." 
+                                rows={4}
+                                required
+                                value={formData.message}
+                                onChange={(e) => setFormData({...formData, message: e.target.value})}
+                            ></textarea>
                         </div>
                         <MagneticButton className="w-full rounded bg-primary py-4 font-black text-white shadow-xl shadow-primary/25 hover:bg-primary/90 transition-all">
                             Submit Inquiry
@@ -102,6 +148,7 @@ const Contact = () => (
             </motion.div>
         </div>
     </section>
-);
+    );
+};
 
 export default Contact;

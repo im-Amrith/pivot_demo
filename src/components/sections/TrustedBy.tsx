@@ -1,35 +1,5 @@
 const logos = [
     {
-        name: 'AetherBank',
-        mark: (
-            <svg viewBox="0 0 220 56" className="h-9 w-auto" aria-hidden="true">
-                <rect x="2" y="10" width="34" height="34" rx="8" className="fill-current" />
-                <path d="M11 34 L19 20 L27 34" stroke="currentColor" strokeWidth="2.5" className="fill-none" />
-                <text x="48" y="36" className="fill-current text-[24px] font-semibold" fontFamily="Inter, system-ui, sans-serif">AetherBank</text>
-            </svg>
-        ),
-    },
-    {
-        name: 'KineticForge',
-        mark: (
-            <svg viewBox="0 0 250 56" className="h-9 w-auto" aria-hidden="true">
-                <circle cx="20" cy="28" r="16" className="fill-none stroke-current" strokeWidth="3" />
-                <path d="M12 28 H28" stroke="currentColor" strokeWidth="3" />
-                <text x="48" y="36" className="fill-current text-[24px] font-semibold" fontFamily="Inter, system-ui, sans-serif">KineticForge</text>
-            </svg>
-        ),
-    },
-    {
-        name: 'NexaLedger',
-        mark: (
-            <svg viewBox="0 0 220 56" className="h-9 w-auto" aria-hidden="true">
-                <path d="M2 12 H34 V44 H2 Z" className="fill-none stroke-current" strokeWidth="3" />
-                <path d="M10 18 L26 38" stroke="currentColor" strokeWidth="3" />
-                <text x="48" y="36" className="fill-current text-[24px] font-semibold" fontFamily="Inter, system-ui, sans-serif">NexaLedger</text>
-            </svg>
-        ),
-    },
-    {
         name: 'Encon',
         mark: (
             <span className="flex items-center gap-3">
